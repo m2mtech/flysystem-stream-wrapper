@@ -1,0 +1,61 @@
+{
+    "name": "m2mtech/flysystem-stream-wrapper",
+    "type": "library",
+    "description": "A stream wrapper for Flysystem V2.",
+    "keywords": [
+        "flysystem",
+        "stream",
+        "wrapper"
+    ],
+    "homepage": "https://github.com/m2mtech/flysystem-stream-wrapper",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Martin Mandl",
+            "email": "tech@m2m.at",
+            "homepage": "https://cms.m2m.at",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.2 || ^8.0",
+        "league/flysystem": "^2.3",
+        "symfony/lock": "^5.3"
+    },
+    "require-dev": {
+        "ext-pcntl": "*",
+        "ext-shmop": "*",
+        "ext-sysvmsg": "*",
+        "amphp/amp": "^2.6.1",
+        "amphp/parallel": "^v1.4.1",
+        "amphp/parallel-functions": "^1.0",
+        "amphp/sync": "^1.4.2",
+        "fakerphp/faker": "^1.16",
+        "opis/closure": "^3.6.2",
+        "phpstan/phpstan": "^1.0",
+        "phpunit/php-invoker": "^2.0|^3.1",
+        "phpunit/phpunit": "^8.5|^9.5",
+        "symplify/easy-coding-standard": "^9.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "M2MTech\\FlysystemStreamWrapper\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "M2MTech\\FlysystemStreamWrapper\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "check-cs": "vendor/bin/ecs check",
+        "fix-cs": "vendor/bin/ecs check --fix",
+        "phpstan": "vendor/bin/phpstan analyse --memory-limit 1G"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

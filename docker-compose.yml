@@ -1,0 +1,33 @@
+version: "3.9"
+services:
+  php8: &php
+    build:
+      context: .
+      dockerfile: docker/php8.0/Dockerfile
+    volumes:
+      - .:/app:delegated
+      - ~/.composer:/.composer:delegated
+
+  php81:
+    <<: *php
+    build:
+      context: .
+      dockerfile: docker/php8.1/Dockerfile
+
+  php74:
+    <<: *php
+    build:
+      context: .
+      dockerfile: docker/php7.4/Dockerfile
+
+  php73:
+    <<: *php
+    build:
+      context: .
+      dockerfile: docker/php7.3/Dockerfile
+
+  php72:
+    <<: *php
+    build:
+      context: .
+      dockerfile: docker/php7.2/Dockerfile
