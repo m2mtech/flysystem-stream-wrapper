@@ -12,7 +12,7 @@ namespace M2MTech\FlysystemStreamWrapper;
 use League\Flysystem\FilesystemOperator;
 use M2MTech\FlysystemStreamWrapper\Flysystem\StreamWrapper;
 
-class FlysystemStreamWrapper
+final class FlysystemStreamWrapper
 {
     public const LOCK_STORE = 'lock_store';
     public const LOCK_TTL = 'lock_ttl';

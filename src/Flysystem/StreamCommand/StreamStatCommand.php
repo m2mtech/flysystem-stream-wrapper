@@ -14,7 +14,7 @@ use League\Flysystem\UnixVisibility\PortableVisibilityConverter;
 use M2MTech\FlysystemStreamWrapper\Flysystem\Exception\StatFailedException;
 use M2MTech\FlysystemStreamWrapper\Flysystem\FileData;
 
-class StreamStatCommand
+final class StreamStatCommand
 {
     use ExceptionHandler;
 

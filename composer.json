@@ -4,8 +4,8 @@
     "description": "A stream wrapper for Flysystem V2.",
     "keywords": [
         "flysystem",
-        "stream",
-        "wrapper"
+        "streamwrapper",
+        "stream-wrapper"
     ],
     "homepage": "https://github.com/m2mtech/flysystem-stream-wrapper",
     "license": "MIT",

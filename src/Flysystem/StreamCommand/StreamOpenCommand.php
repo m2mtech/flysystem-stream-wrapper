@@ -16,7 +16,7 @@ use M2MTech\FlysystemStreamWrapper\Flysystem\Exception\UnableToReadException;
 use M2MTech\FlysystemStreamWrapper\Flysystem\Exception\UnableToWriteException;
 use M2MTech\FlysystemStreamWrapper\Flysystem\FileData;
 
-class StreamOpenCommand
+final class StreamOpenCommand
 {
     use ExceptionHandler;
 
@@ -71,7 +71,7 @@ class StreamOpenCommand
                 rewind($current->handle);
             }
         } catch (FilesystemException $e) {
-            if ($options & STREAM_REPORT_ERRORS) {
+            if (($options & STREAM_REPORT_ERRORS) !== 0) {
                 return self::triggerError(UnableToReadException::atLocation(
                     self::OPEN_COMMAND,
                     $current->path,
@@ -90,7 +90,7 @@ class StreamOpenCommand
             return true;
         }
 
-        if ($options & STREAM_REPORT_ERRORS) {
+        if (($options & STREAM_REPORT_ERRORS) !== 0) {
             return self::triggerError(FileNotFoundException::atLocation(self::OPEN_COMMAND, $current->path));
         }
 

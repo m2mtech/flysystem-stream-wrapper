@@ -11,7 +11,7 @@ namespace M2MTech\FlysystemStreamWrapper\Flysystem\StreamCommand;
 
 use M2MTech\FlysystemStreamWrapper\Flysystem\FileData;
 
-class StreamReadCommand
+final class StreamReadCommand
 {
     public static function run(FileData $current, int $count): string
     {

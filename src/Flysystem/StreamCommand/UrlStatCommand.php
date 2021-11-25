@@ -13,7 +13,7 @@ use League\Flysystem\FilesystemException;
 use M2MTech\FlysystemStreamWrapper\Flysystem\Exception\StatFailedException;
 use M2MTech\FlysystemStreamWrapper\Flysystem\FileData;
 
-class UrlStatCommand
+final class UrlStatCommand
 {
     use ExceptionHandler;
 
@@ -27,7 +27,7 @@ class UrlStatCommand
         try {
             return StreamStatCommand::getStat($current);
         } catch (FilesystemException $e) {
-            if (($flags & STREAM_URL_STAT_QUIET)) {
+            if (($flags & STREAM_URL_STAT_QUIET) !== 0) {
                 return false;
             }
 

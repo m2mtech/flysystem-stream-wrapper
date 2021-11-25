@@ -25,7 +25,7 @@ trait ExceptionHandler
     {
         $message = $e->getMessage();
         $previous = $e->getPrevious();
-        if (!$previous) {
+        if (!$previous instanceof Throwable) {
             return $message;
         }
 

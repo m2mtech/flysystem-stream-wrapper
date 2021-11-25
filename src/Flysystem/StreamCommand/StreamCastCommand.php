@@ -11,7 +11,7 @@ namespace M2MTech\FlysystemStreamWrapper\Flysystem\StreamCommand;
 
 use M2MTech\FlysystemStreamWrapper\Flysystem\FileData;
 
-class StreamCastCommand
+final class StreamCastCommand
 {
     /**
      * @noinspection PhpMissingReturnTypeInspection

@@ -11,7 +11,7 @@ namespace M2MTech\FlysystemStreamWrapper\Flysystem\StreamCommand;
 
 use M2MTech\FlysystemStreamWrapper\Flysystem\FileData;
 
-class StreamSetOptionCommand
+final class StreamSetOptionCommand
 {
     public static function run(FileData $current, int $option, int $arg1, ?int $arg2): bool
     {

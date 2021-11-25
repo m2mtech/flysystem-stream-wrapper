@@ -15,7 +15,7 @@ use M2MTech\FlysystemStreamWrapper\Flysystem\Exception\UnableToChangePermissions
 use M2MTech\FlysystemStreamWrapper\Flysystem\Exception\UnableToWriteException;
 use M2MTech\FlysystemStreamWrapper\Flysystem\FileData;
 
-class StreamMetadataCommand
+final class StreamMetadataCommand
 {
     use ExceptionHandler;
 
@@ -36,11 +36,7 @@ class StreamMetadataCommand
                 }
 
                 $converter = new PortableVisibilityConverter();
-                if (is_dir($path)) {
-                    $visibility = $converter->inverseForDirectory($value);
-                } else {
-                    $visibility = $converter->inverseForFile($value);
-                }
+                $visibility = is_dir($path) ? $converter->inverseForDirectory($value) : $converter->inverseForFile($value);
 
                 try {
                     $filesystem->setVisibility($file, $visibility);

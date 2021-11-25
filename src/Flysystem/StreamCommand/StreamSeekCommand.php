@@ -11,7 +11,7 @@ namespace M2MTech\FlysystemStreamWrapper\Flysystem\StreamCommand;
 
 use M2MTech\FlysystemStreamWrapper\Flysystem\FileData;
 
-class StreamSeekCommand
+final class StreamSeekCommand
 {
     public static function run(FileData $current, int $offset, int $whence = SEEK_SET): bool
     {

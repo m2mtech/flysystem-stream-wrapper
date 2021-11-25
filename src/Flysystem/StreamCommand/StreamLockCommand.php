@@ -15,7 +15,7 @@ use Symfony\Component\Lock\Key;
 use Symfony\Component\Lock\Lock;
 use Symfony\Component\Lock\Store\StoreFactory;
 
-class StreamLockCommand
+final class StreamLockCommand
 {
     public static function run(FileData $current, int $operation): bool
     {

@@ -17,7 +17,7 @@ use M2MTech\FlysystemStreamWrapper\Flysystem\Exception\DirectoryNotEmptyExceptio
 use M2MTech\FlysystemStreamWrapper\Flysystem\Exception\RootDirectoryException;
 use M2MTech\FlysystemStreamWrapper\Flysystem\FileData;
 
-class RmdirCommand
+final class RmdirCommand
 {
     use ExceptionHandler;
 
@@ -29,13 +29,13 @@ class RmdirCommand
 
         $n = new WhitespacePathNormalizer();
         $n->normalizePath($current->file);
-        if (!$n->normalizePath($current->file)) {
+        if ('' === $n->normalizePath($current->file)) {
             return self::triggerError(
                 RootDirectoryException::atLocation(self::RMDIR_COMMAND, $current->path)
             );
         }
 
-        if ($options & STREAM_MKDIR_RECURSIVE) {
+        if (($options & STREAM_MKDIR_RECURSIVE) !== 0) {
             return self::rmdir($current);
         }
 

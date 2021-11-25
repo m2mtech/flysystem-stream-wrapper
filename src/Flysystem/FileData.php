@@ -15,7 +15,7 @@ use League\Flysystem\StorageAttributes;
 use M2MTech\FlysystemStreamWrapper\FlysystemStreamWrapper;
 use Symfony\Component\Lock\Key;
 
-class FileData
+final class FileData
 {
     /** @var string */
     public $path;
@@ -30,7 +30,7 @@ class FileData
     public $filesystem;
 
     /** @var array<string, int|string> */
-    public $config;
+    public $config = [];
 
     /** @var resource|false */
     public $handle = false;

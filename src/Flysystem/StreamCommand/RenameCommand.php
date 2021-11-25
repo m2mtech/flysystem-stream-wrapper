@@ -16,7 +16,7 @@ use M2MTech\FlysystemStreamWrapper\Flysystem\Exception\IsDirectoryException;
 use M2MTech\FlysystemStreamWrapper\Flysystem\Exception\IsNotDirectoryException;
 use M2MTech\FlysystemStreamWrapper\Flysystem\FileData;
 
-class RenameCommand
+final class RenameCommand
 {
     use ExceptionHandler;
 

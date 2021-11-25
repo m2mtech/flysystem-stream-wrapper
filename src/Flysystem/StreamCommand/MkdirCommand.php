@@ -16,7 +16,7 @@ use M2MTech\FlysystemStreamWrapper\Flysystem\Exception\DirectoryExistsException;
 use M2MTech\FlysystemStreamWrapper\Flysystem\Exception\UnableToCreateDirectoryException;
 use M2MTech\FlysystemStreamWrapper\Flysystem\FileData;
 
-class MkdirCommand
+final class MkdirCommand
 {
     use ExceptionHandler;
 

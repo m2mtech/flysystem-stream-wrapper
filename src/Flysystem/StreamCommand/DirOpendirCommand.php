@@ -15,7 +15,7 @@ use League\Flysystem\FilesystemException;
 use M2MTech\FlysystemStreamWrapper\Flysystem\Exception\DirectoryNotFoundException;
 use M2MTech\FlysystemStreamWrapper\Flysystem\FileData;
 
-class DirOpendirCommand
+final class DirOpendirCommand
 {
     use ExceptionHandler;
 
@@ -41,10 +41,6 @@ class DirOpendirCommand
     public static function getDir(FileData $current): void
     {
         $listing = $current->filesystem->listContents($current->file)->getIterator();
-        if ($listing instanceof Iterator) {
-            $current->dirListing = $listing;
-        } else {
-            $current->dirListing = new IteratorIterator($listing);
-        }
+        $current->dirListing = $listing instanceof Iterator ? $listing : new IteratorIterator($listing);
     }
 }

@@ -14,7 +14,7 @@ use M2MTech\FlysystemStreamWrapper\Flysystem\Exception\CouldNotDeleteFileExcepti
 use M2MTech\FlysystemStreamWrapper\Flysystem\Exception\FileNotFoundException;
 use M2MTech\FlysystemStreamWrapper\Flysystem\FileData;
 
-class UnlinkCommand
+final class UnlinkCommand
 {
     use ExceptionHandler;
 

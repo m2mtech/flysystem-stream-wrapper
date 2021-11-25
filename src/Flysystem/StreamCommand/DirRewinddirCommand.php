@@ -12,7 +12,7 @@ namespace M2MTech\FlysystemStreamWrapper\Flysystem\StreamCommand;
 use League\Flysystem\FilesystemException;
 use M2MTech\FlysystemStreamWrapper\Flysystem\FileData;
 
-class DirRewinddirCommand
+final class DirRewinddirCommand
 {
     use ExceptionHandler;
 

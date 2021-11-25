@@ -15,7 +15,7 @@ use M2MTech\FlysystemStreamWrapper\Flysystem\StreamCommand\StreamWriteCommand;
 /**
  * @method url_stat(string $path, int $int)
  */
-class StreamWrapper
+final class StreamWrapper
 {
     /** @var FileData */
     private $current;
