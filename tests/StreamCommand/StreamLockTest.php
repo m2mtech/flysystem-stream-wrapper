@@ -43,6 +43,10 @@ class StreamLockTest extends AbstractStreamCommandTest
     /** @medium */
     public function testParallelProcesses(): void
     {
+        if (version_compare(PHP_VERSION, '8.1.0') >= 0) {
+            $this->markTestSkipped('skipped parallel testing of locking for php8.1 till opis/closure is available in version 4.x');
+        }
+
         try {
             $parcel = SharedMemoryParcel::create($id = uniqid('test', true), false);
         } catch (SharedMemoryException|SyncException $e) {

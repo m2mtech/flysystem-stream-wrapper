@@ -1,20 +1,21 @@
 # Changelog
 
-## [Unreleased]
+## [1.0.1] - 2021-12-29
 ### Changed
-- run rector in preparation for PHP 8.1
+- compatibility with symfony 6.x
+- skipped unit tests of locking for php8.1 till opis/closure is available in version 4.x (only used for testing)
 
 ## [1.0.0] - 2021-11-01
 - Initial release 
 
 <!---
-## [1.0.1] - 2021-XX-XX
-### Added
+## [Unreleased]
+### Changed
 - ...
 --->
 
-[Unreleased]: https://github.com/m2mtech/flysystem-stream-wrapper/compare/v1.0.0...HEAD
+[1.0.1]: https://github.com/m2mtech/flysystem-stream-wrapper/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/m2mtech/flysystem-stream-wrapper/releases/tag/v1.0.0
 <!---
-[1.0.1]: https://github.com/m2mtech/flysystem-stream-wrapper/compare/v1.0.0...v1.0.1
+[Unreleased]: https://github.com/m2mtech/flysystem-stream-wrapper/compare/v1.0.1...HEAD
 --->
