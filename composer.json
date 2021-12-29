@@ -20,7 +20,7 @@
     "require": {
         "php": "^7.2 || ^8.0",
         "league/flysystem": "^2.3",
-        "symfony/lock": "^5.3"
+        "symfony/lock": "^5.3|^6.0"
     },
     "require-dev": {
         "ext-pcntl": "*",
