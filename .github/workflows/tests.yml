@@ -39,3 +39,23 @@ jobs:
 
       - name: Execute tests
         run: vendor/bin/phpunit
+
+  phpstan:
+    runs-on: ubuntu-latest
+    name: Run phpstan analyse
+    steps:
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.4
+          extensions: pcntl, shmop, sysvmsg
+          coverage: none
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: composer update --prefer-stable --prefer-dist --no-interaction
+
+      - name: Execute phpstan analyse
+        run: vendor/bin/phpstan analyse --memory-limit 1G
