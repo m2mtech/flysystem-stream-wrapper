@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.2] - 2022-01-10
+### Added
+- replace section in [composer.json](composer.json) as requested in #2
+
 ## [1.0.1] - 2021-12-29
 ### Changed
 - compatibility with symfony 6.x
@@ -14,6 +18,7 @@
 - ...
 --->
 
+[1.0.2]: https://github.com/m2mtech/flysystem-stream-wrapper/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/m2mtech/flysystem-stream-wrapper/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/m2mtech/flysystem-stream-wrapper/releases/tag/v1.0.0
 <!---
