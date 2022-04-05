@@ -5,7 +5,7 @@
 
 ---
 
-This package provides a stream wrapper for Flysystem V2.
+This package provides a stream wrapper for Flysystem V2 & V3.
 
 ## Flysystem V1
 
@@ -46,7 +46,7 @@ FlysystemStreamWrapper::register('fly', $filesystem, [
 
 ## Testing
 
-This package has been developed for php 7.4 with compatibility tested for php 7.2 to 8.0.
+This package has been developed for php 7.4 with compatibility tested for php 7.2 to 8.1.
 
 ```bash
 # with php installed

@@ -21,7 +21,6 @@ class DirReaddirTest extends TestCase
     public function test(): void
     {
         $current = new FileData();
-        /* @phpstan-ignore-next-line */
         $current->dirListing = new ArrayIterator([
             new FileAttributes('one'),
             new FileAttributes('two'),
