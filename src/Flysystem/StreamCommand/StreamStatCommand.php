@@ -99,13 +99,17 @@ final class StreamStatCommand
     public static function getRemoteStats(FileData $current): array
     {
         $converter = new PortableVisibilityConverter();
-        $visibility = $current->filesystem->visibility($current->file);
+        try {
+            $visibility = $current->filesystem->visibility($current->file);
+        } catch (FilesystemException $e) {
+            $visibility = null;
+        }
 
         if ('directory' === $current->filesystem->mimeType($current->file)) {
-            $mode = 040000 + $converter->forDirectory($visibility);
+            $mode = 040000 + ($visibility ? $converter->forDirectory($visibility) : 0);
             $size = 0;
         } else {
-            $mode = 0100000 + $converter->forFile($visibility);
+            $mode = 0100000 + ($visibility ? $converter->forFile($visibility) : 0);
             $size = $current->filesystem->fileSize($current->file);
         }
 

@@ -68,7 +68,7 @@ final class StreamOpenCommand
 
             $current->alwaysAppend = 'a' === $mode[0];
             if (is_resource($current->handle) && !$current->alwaysAppend) {
-                rewind($current->handle);
+                @rewind($current->handle);
             }
         } catch (FilesystemException $e) {
             if (($options & STREAM_REPORT_ERRORS) !== 0) {
