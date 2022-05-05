@@ -17,15 +17,19 @@ final class FlysystemStreamWrapper
     public const LOCK_STORE = 'lock_store';
     public const LOCK_TTL = 'lock_ttl';
 
+    public const IGNORE_VISIBILITY_ERROS = 'ignore_visibility_erros';
+
     public const DEFAULT_CONFIGURATION = [
         self::LOCK_STORE => 'flock:///tmp',
         self::LOCK_TTL => 300,
+
+        self::IGNORE_VISIBILITY_ERROS => false,
     ];
 
     /** @var array <string, FilesystemOperator> */
     public static $filesystems = [];
 
-    /** @var array <string, array<string, int|string>> */
+    /** @var array <string, array<string, int|string|bool>> */
     public static $config = [];
 
     /** @param array<string, int|string> $configuration */

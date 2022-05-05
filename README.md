@@ -44,6 +44,15 @@ FlysystemStreamWrapper::register('fly', $filesystem, [
 ]);
 ```
 
+Some adaptors seem to throw an exception when visibility is used. To be able to use such adaptors, tell the stream wrapper to ignore them, e.g.:
+
+```php
+FlysystemStreamWrapper::register('fly', $filesystem, [
+    FlysystemStreamWrapper::IGNORE_VISIBILITY_ERROS => true,
+]);
+```
+
+
 ## Testing
 
 This package has been developed for php 7.4 with compatibility tested for php 7.2 to 8.1.

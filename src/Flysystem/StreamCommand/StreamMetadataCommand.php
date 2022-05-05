@@ -41,12 +41,14 @@ final class StreamMetadataCommand
                 try {
                     $filesystem->setVisibility($file, $visibility);
                 } catch (FilesystemException $e) {
-                    return self::triggerError(UnableToChangePermissionsException::atLocation(
-                        self::METADATA_COMMAND,
-                        $current->path,
-                        decoct($value),
-                        $e
-                    ));
+                    if (!$current->ignoreVisibilityErrors()) {
+                        return self::triggerError(UnableToChangePermissionsException::atLocation(
+                            self::METADATA_COMMAND,
+                            $current->path,
+                            decoct($value),
+                            $e
+                        ));
+                    }
                 }
 
                 return true;

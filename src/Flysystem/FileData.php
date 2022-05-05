@@ -29,7 +29,7 @@ final class FileData
     /** @var FilesystemOperator */
     public $filesystem;
 
-    /** @var array<string, int|string> */
+    /** @var array<string, int|string|bool> */
     public $config = [];
 
     /** @var resource|false */
@@ -68,5 +68,10 @@ final class FileData
     public static function getFile(string $path): string
     {
         return (string) substr($path, strpos($path, '://') + 3);
+    }
+
+    public function ignoreVisibilityErrors(): bool
+    {
+        return (bool) $this->config[FlysystemStreamWrapper::IGNORE_VISIBILITY_ERROS];
     }
 }

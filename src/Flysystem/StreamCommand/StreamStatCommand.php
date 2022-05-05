@@ -12,6 +12,7 @@ namespace M2MTech\FlysystemStreamWrapper\Flysystem\StreamCommand;
 use League\Flysystem\FilesystemException;
 use League\Flysystem\UnableToRetrieveMetadata;
 use League\Flysystem\UnixVisibility\PortableVisibilityConverter;
+use League\Flysystem\Visibility;
 use M2MTech\FlysystemStreamWrapper\Flysystem\Exception\StatFailedException;
 use M2MTech\FlysystemStreamWrapper\Flysystem\FileData;
 
@@ -100,7 +101,16 @@ final class StreamStatCommand
     public static function getRemoteStats(FileData $current): array
     {
         $converter = new PortableVisibilityConverter();
-        $visibility = $current->filesystem->visibility($current->file);
+
+        try {
+            $visibility = $current->filesystem->visibility($current->file);
+        } catch (UnableToRetrieveMetadata $e) {
+            if (!$current->ignoreVisibilityErrors()) {
+                throw $e;
+            }
+
+            $visibility = Visibility::PUBLIC;
+        }
 
         $mode = 0;
         $size = 0;

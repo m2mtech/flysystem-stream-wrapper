@@ -3,6 +3,7 @@
 ## [Unreleased]
 - allow for adaptors closing the file handle themselves
 - fixed broken unit-tests changed MimeType detection of [Flysystem 3.0.16](https://github.com/thephpleague/flysystem/compare/3.0.15...3.0.16)
+- allow to ignore visibility errors
 
 ## [1.0.3] - 2022-01-21
 ### Added
