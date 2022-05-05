@@ -65,12 +65,24 @@ class AdapterWithoutVisibilitySupportTest extends AbstractStreamCommandTest
             ->with('test')
             ->willThrowException(UnableToRetrieveMetadata::visibility($current->file));
 
-//        try {
         $stats = StreamStatCommand::getRemoteStats($current);
         $this->assertSame(040755, $stats[0]);
-//        } catch (FilesystemException $e) {
-//            $this->fail();
-//        }
+    }
+
+    public function testVisibilityForFile(): void
+    {
+        $current = $this->getCurrent();
+        $this->ignoreVisibilityErrors($current);
+
+        /** @var MockObject $filesystem */
+        $filesystem = $current->filesystem;
+        $filesystem->expects($this->exactly(1))
+            ->method('visibility')
+            ->with('test')
+            ->willThrowException(UnableToRetrieveMetadata::visibility($current->file));
+
+        $stats = StreamStatCommand::getRemoteStats($current);
+        $this->assertSame(0100644, $stats[0]);
     }
 
     private function ignoreVisibilityErrors(FileData $current): void
