@@ -38,7 +38,8 @@ class MkdirTest extends AbstractStreamCommandTest
     {
         $current = $this->getCurrent([
             'visibility' => 'public',
-            'mimeType' => 'dontCare',
+            'mimeType' => 'dontCare', // V2
+            'directoryExists' => true, // V3
         ]);
 
         $this->assertFalse(@MkdirCommand::run($current, self::TEST_PATH, 0777, 42));

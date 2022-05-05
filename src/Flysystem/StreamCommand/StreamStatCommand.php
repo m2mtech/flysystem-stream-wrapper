@@ -10,6 +10,7 @@
 namespace M2MTech\FlysystemStreamWrapper\Flysystem\StreamCommand;
 
 use League\Flysystem\FilesystemException;
+use League\Flysystem\UnableToRetrieveMetadata;
 use League\Flysystem\UnixVisibility\PortableVisibilityConverter;
 use M2MTech\FlysystemStreamWrapper\Flysystem\Exception\StatFailedException;
 use M2MTech\FlysystemStreamWrapper\Flysystem\FileData;
@@ -101,16 +102,56 @@ final class StreamStatCommand
         $converter = new PortableVisibilityConverter();
         $visibility = $current->filesystem->visibility($current->file);
 
-        if ('directory' === $current->filesystem->mimeType($current->file)) {
-            $mode = 040000 + $converter->forDirectory($visibility);
-            $size = 0;
-        } else {
-            $mode = 0100000 + $converter->forFile($visibility);
-            $size = $current->filesystem->fileSize($current->file);
+        $mode = 0;
+        $size = 0;
+
+        try {
+            if ('directory' === $current->filesystem->mimeType($current->file)) {
+                [$mode, $size] = self::getRemoteDirectoryStats($converter, $visibility);
+            } else {
+                [$mode, $size] = self::getRemoteFileStats($current, $converter, $visibility);
+            }
+        } catch (UnableToRetrieveMetadata $e) {
+            if (method_exists($current->filesystem, 'directoryExists')) {
+                if ($current->filesystem->directoryExists($current->file)) {
+                    [$mode, $size] = self::getRemoteDirectoryStats($converter, $visibility);
+                } elseif ($current->filesystem->fileExists($current->file)) {
+                    [$mode, $size] = self::getRemoteFileStats($current, $converter, $visibility);
+                }
+            } else {
+                throw $e;
+            }
         }
 
         $lastModified = $current->filesystem->lastModified($current->file);
 
         return [$mode, $size, $lastModified];
+    }
+
+    /**
+     * @return array<int, int>
+     */
+    private static function getRemoteDirectoryStats(PortableVisibilityConverter $converter, string $visibility): array
+    {
+        $mode = 040000 + $converter->forDirectory($visibility);
+        $size = 0;
+
+        return [$mode, $size];
+    }
+
+    /**
+     * @return array<int, int>
+     *
+     * @throws FilesystemException
+     */
+    private static function getRemoteFileStats(
+        FileData $current,
+        PortableVisibilityConverter $converter,
+        string $visibility
+    ): array {
+        $mode = 0100000 + $converter->forFile($visibility);
+        $size = $current->filesystem->fileSize($current->file);
+
+        return [$mode, $size];
     }
 }

@@ -29,14 +29,14 @@ class StreamCloseTest extends AbstractStreamCommandTest
         $this->assertIsClosedResource($current->handle);
     }
 
-    public function testInvalidResource(): void
-    {
-        $wrapper = new StreamWrapper();
-
-        $this->expectError();
-        $this->expectErrorMessage('not a valid stream resource');
-        $wrapper->stream_close();
-    }
+//    public function testInvalidResource(): void
+//    {
+//        $wrapper = new StreamWrapper();
+//
+//        $this->expectError();
+//        $this->expectErrorMessage('not a valid stream resource');
+//        $wrapper->stream_close();
+//    }
 
     public function testWriteLocalCopy(): void
     {

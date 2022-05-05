@@ -19,11 +19,15 @@ abstract class AbstractStreamCommandTest extends TestCase
     public const TEST_PROTOCOL = 'test';
     public const TEST_PATH = 'test://test';
 
-    /** @param array<string, string> $methods */
+    /** @param array<string, string|bool> $methods */
     public function getFilesystem(array $methods = []): FilesystemOperator
     {
         $filesystem = $this->createMock(FilesystemOperator::class);
         foreach ($methods as $method => $return) {
+            if ('directoryExists' === $method) {
+                continue;
+            }
+
             $filesystem->method($method)->willReturn($return);
         }
 
@@ -32,7 +36,7 @@ abstract class AbstractStreamCommandTest extends TestCase
         return $filesystem;
     }
 
-    /** @param array<string, string> $methods */
+    /** @param array<string, string|bool> $methods */
     public function getCurrent(array $methods = []): FileData
     {
         $this->getFilesystem($methods);
