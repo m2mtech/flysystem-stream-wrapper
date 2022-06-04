@@ -34,7 +34,7 @@ final class StreamStatCommand
         }
     }
 
-    private const STATS_ZERO = [0, 'dev', 1, 'ino', 3, 'nlink', 4, 'uid', 5, 'gid', 6, 'rdev'];
+    private const STATS_ZERO = [0, 'dev', 1, 'ino', 3, 'nlink', 6, 'rdev'];
     private const STATS_MODE = [2, 'mode'];
     private const STATS_SIZE = [7, 'size'];
     private const STATS_TIME = [8, 'atime', 9, 'mtime', 10, 'ctime'];
@@ -89,6 +89,9 @@ final class StreamStatCommand
                 $stats[$key] = $time;
             }
         }
+
+        $stats['uid'] = $stats[4] = (int) getmyuid();
+        $stats['gid'] = $stats[5] = (int) getmygid();
 
         return $stats;
     }

@@ -9,7 +9,6 @@
 
 namespace M2MTech\FlysystemStreamWrapper\Tests\Issues;
 
-use League\Flysystem\FilesystemException;
 use League\Flysystem\UnableToRetrieveMetadata;
 use League\Flysystem\UnableToSetVisibility;
 use League\Flysystem\Visibility;

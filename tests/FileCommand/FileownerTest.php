@@ -14,7 +14,7 @@ class FileownerTest extends AbstractFileCommandTest
     public function test(): void
     {
         $file = $this->testDir->createFile(true);
-        $this->assertSame(0, fileowner($file->flysystem));
+        $this->assertSame(fileowner($file->local), fileowner($file->flysystem));
     }
 
     public function testFailed(): void

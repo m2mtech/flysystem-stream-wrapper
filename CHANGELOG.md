@@ -1,5 +1,9 @@
 # Changelog
 
+## [Unreleased]
+### Changed
+- set current user uid & gid in stats
+
 ## [1.1.0] - 2022-05-05
 - allow for adaptors closing the file handle themselves
 - fixed broken directory detection caused by changed MimeType detection of [Flysystem 3.0.16](https://github.com/thephpleague/flysystem/compare/3.0.15...3.0.16)
@@ -27,6 +31,7 @@
 - ...
 --->
 
+[Unreleased]: https://github.com/m2mtech/flysystem-stream-wrapper/compare/v1.1.0...HEAD
 [1.1.0]: https://github.com/m2mtech/flysystem-stream-wrapper/compare/v1.0.3...v1.1.0
 [1.0.3]: https://github.com/m2mtech/flysystem-stream-wrapper/compare/v1.0.2...v1.0.3
 [1.0.2]: https://github.com/m2mtech/flysystem-stream-wrapper/compare/v1.0.1...v1.0.2

@@ -7,21 +7,22 @@
  * file that was distributed with this source code.
  */
 
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symplify\EasyCodingStandard\Config\ECSConfig;
 use Symplify\EasyCodingStandard\ValueObject\Option;
 use Symplify\EasyCodingStandard\ValueObject\Set\SetList;
 
-return static function (ContainerConfigurator $containerConfigurator): void {
-    $parameters = $containerConfigurator->parameters();
+return static function (ECSConfig $ecsConfig): void {
+    $ecsConfig->sets([
+        SetList::SYMFONY,
+        SetList::CLEAN_CODE,
+    ]);
 
-    $containerConfigurator->import(SetList::SYMFONY);
-    $containerConfigurator->import(SetList::CLEAN_CODE);
-
-    $parameters->set(Option::PATHS, [
+    $ecsConfig->paths([
         __DIR__.'/src',
         __DIR__.'/tests',
     ]);
 
+    $parameters = $ecsConfig->parameters();
     $parameters->set(Option::CACHE_DIRECTORY, __DIR__.'/.ecs_cache');
     $parameters->set(Option::PARALLEL, true);
 };

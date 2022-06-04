@@ -14,7 +14,7 @@ class FilegroupTest extends AbstractFileCommandTest
     public function test(): void
     {
         $file = $this->testDir->createFile(true);
-        $this->assertSame(0, filegroup($file->flysystem));
+        $this->assertSame(filegroup($file->local), filegroup($file->flysystem));
     }
 
     public function testFailed(): void

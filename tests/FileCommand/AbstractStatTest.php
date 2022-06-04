@@ -13,7 +13,7 @@ abstract class AbstractStatTest extends AbstractFileCommandTest
 {
     use DataProvider;
 
-    private const STATS_ZERO = [0, 'dev', 1, 'ino', 3, 'nlink', 4, 'uid', 5, 'gid', 6, 'rdev'];
+    private const STATS_ZERO = [0, 'dev', 1, 'ino', 3, 'nlink', 6, 'rdev'];
     private const STATS_MODE = [2, 'mode'];
     private const STATS_SIZE = [7, 'size'];
     private const STATS_TIME = [8, 'atime', 9, 'mtime', 10, 'ctime'];
@@ -46,6 +46,9 @@ abstract class AbstractStatTest extends AbstractFileCommandTest
         foreach (self::STATS_TIME as $key) {
             $stats[$key] = $time;
         }
+
+        $stats['uid'] = $stats[4] = getmyuid();
+        $stats['gid'] = $stats[5] = getmygid();
 
         return $stats;
     }
