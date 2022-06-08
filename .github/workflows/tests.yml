@@ -23,7 +23,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          extensions: pcntl, shmop, sysvmsg
+          extensions: intl, pcntl, shmop, sysvmsg
           coverage: none
 
       - name: Checkout code

@@ -67,7 +67,7 @@ docker-compose run php74 composer test
 
 ## Changelog
 
-Please see [CHANGELOG](CHANGELOG.md) for more information about recentl changes.
+Please see [CHANGELOG](CHANGELOG.md) for more information about recent changes.
 
 ## Contributing
 

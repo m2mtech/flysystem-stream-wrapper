@@ -1,7 +1,9 @@
 # Changelog
 
+## [Unreleased]
+- added intl for dev to fix ecs dependency
+
 ## [1.2.0] - 2022-06-04
-### Changed
 - set current user uid & gid in stats
 
 ## [1.1.0] - 2022-05-05
@@ -10,15 +12,12 @@
 - allow to ignore visibility errors
 
 ## [1.0.3] - 2022-01-21
-### Added
 - allow flysystem v3
 
 ## [1.0.2] - 2022-01-10
-### Added
 - replace section in [composer.json](composer.json)
 
 ## [1.0.1] - 2021-12-29
-### Changed
 - compatibility with symfony 6.x
 - skipped unit tests of locking for php8.1 till opis/closure is available in version 4.x (only used for testing)
 
@@ -31,6 +30,7 @@
 - ...
 --->
 
+[Unreleased]: https://github.com/m2mtech/flysystem-stream-wrapper/compare/v1.2.0...HEAD
 [1.2.0]: https://github.com/m2mtech/flysystem-stream-wrapper/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/m2mtech/flysystem-stream-wrapper/compare/v1.0.3...v1.1.0
 [1.0.3]: https://github.com/m2mtech/flysystem-stream-wrapper/compare/v1.0.2...v1.0.3
