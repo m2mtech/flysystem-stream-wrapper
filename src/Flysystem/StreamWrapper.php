@@ -106,7 +106,9 @@ final class StreamWrapper
             }
 
             if (false !== $currentPosition) {
-                fseek($this->current->handle, $currentPosition);
+                if (is_resource($this->current->handle)) {
+                    fseek($this->current->handle, $currentPosition);
+                }
             }
         }
 
