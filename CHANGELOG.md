@@ -1,7 +1,8 @@
 # Changelog
 
-## [Unreleased]
+## [1.2.1] - 2022-06-10
 - added intl for dev to fix ecs dependency
+- fix for resources closed by flysystem prematurely
 
 ## [1.2.0] - 2022-06-04
 - set current user uid & gid in stats
@@ -30,7 +31,7 @@
 - ...
 --->
 
-[Unreleased]: https://github.com/m2mtech/flysystem-stream-wrapper/compare/v1.2.0...HEAD
+[1.2.1]: https://github.com/m2mtech/flysystem-stream-wrapper/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/m2mtech/flysystem-stream-wrapper/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/m2mtech/flysystem-stream-wrapper/compare/v1.0.3...v1.1.0
 [1.0.3]: https://github.com/m2mtech/flysystem-stream-wrapper/compare/v1.0.2...v1.0.3
@@ -38,5 +39,5 @@
 [1.0.1]: https://github.com/m2mtech/flysystem-stream-wrapper/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/m2mtech/flysystem-stream-wrapper/releases/tag/v1.0.0
 <!---
-[Unreleased]: https://github.com/m2mtech/flysystem-stream-wrapper/compare/v1.0.3...HEAD
+[Unreleased]: https://github.com/m2mtech/flysystem-stream-wrapper/compare/v1.2.1...HEAD
 --->
