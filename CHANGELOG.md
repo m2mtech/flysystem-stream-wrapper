@@ -1,7 +1,7 @@
 # Changelog
 
 ## [Unreleased]
-- adjusted uid & git retrieval 
+- adjusted uid & gid retrieval 
 - added manual uid & gid setup
 - allow to access parameters of [`PortableVisibilityConverter`](https://flysystem.thephpleague.com/docs/usage/unix-visibility/)
 - fixed typo in const `IGNORE_VISIBILITY_ERRORS`
