@@ -44,14 +44,39 @@ FlysystemStreamWrapper::register('fly', $filesystem, [
 ]);
 ```
 
+### Problems with Visibility
+
 Some adaptors seem to throw an exception when visibility is used. To be able to use such adaptors, tell the stream wrapper to ignore them, e.g.:
 
 ```php
 FlysystemStreamWrapper::register('fly', $filesystem, [
-    FlysystemStreamWrapper::IGNORE_VISIBILITY_ERROS => true,
+    FlysystemStreamWrapper::IGNORE_VISIBILITY_ERRORS => true,
 ]);
 ```
 
+### Problems with `is_readable` / `is_writable`
+
+A couple of filesystem functions use `uid` and `gid` of the user running php. Unfortunately there is no straight forward cross-plattform usable method available to derive those values. The wrapper tries to *guess* them. But depending on your system settings it might fail.
+In such cases you can set them manually, e.g.:
+
+```php
+FlysystemStreamWrapper::register('fly', $filesystem, [
+    FlysystemStreamWrapper::UID => 1000,
+    FlysystemStreamWrapper::GID => 1000,
+]);
+```
+
+or go haywire accessing the parameters for [`PortableVisibilityConverter`](https://flysystem.thephpleague.com/docs/usage/unix-visibility/) directly via:
+
+```php
+FlysystemStreamWrapper::register('fly', $filesystem, [
+    FlysystemStreamWrapper::VISIBILITY_FILE_PUBLIC => 0644,
+    FlysystemStreamWrapper::VISIBILITY_FILE_PRIVATE => 0600,
+    FlysystemStreamWrapper::VISIBILITY_DIRECTORY_PUBLIC => 0755,
+    FlysystemStreamWrapper::VISIBILITY_DIRECTORY_PRIVATE => 0700,
+    FlysystemStreamWrapper::VISIBILITY_DEFAULT_FOR_DIRECTORIES => Visibility::PRIVATE,
+]);
+```
 
 ## Testing
 

@@ -15,6 +15,7 @@ use League\Flysystem\UnixVisibility\PortableVisibilityConverter;
 use League\Flysystem\Visibility;
 use M2MTech\FlysystemStreamWrapper\Flysystem\Exception\StatFailedException;
 use M2MTech\FlysystemStreamWrapper\Flysystem\FileData;
+use M2MTech\FlysystemStreamWrapper\FlysystemStreamWrapper;
 
 final class StreamStatCommand
 {
@@ -90,8 +91,8 @@ final class StreamStatCommand
             }
         }
 
-        $stats['uid'] = $stats[4] = (int) getmyuid();
-        $stats['gid'] = $stats[5] = (int) getmygid();
+        $stats['uid'] = $stats[4] = (int) $current->config[FlysystemStreamWrapper::UID];
+        $stats['gid'] = $stats[5] = (int) $current->config[FlysystemStreamWrapper::GID];
 
         return $stats;
     }
@@ -103,7 +104,13 @@ final class StreamStatCommand
      */
     public static function getRemoteStats(FileData $current): array
     {
-        $converter = new PortableVisibilityConverter();
+        $converter = new PortableVisibilityConverter(
+            (int) $current->config[FlysystemStreamWrapper::VISIBILITY_FILE_PUBLIC],
+            (int) $current->config[FlysystemStreamWrapper::VISIBILITY_FILE_PRIVATE],
+            (int) $current->config[FlysystemStreamWrapper::VISIBILITY_DIRECTORY_PUBLIC],
+            (int) $current->config[FlysystemStreamWrapper::VISIBILITY_DIRECTORY_PRIVATE],
+            (string) $current->config[FlysystemStreamWrapper::VISIBILITY_DEFAULT_FOR_DIRECTORIES]
+        );
 
         try {
             $visibility = $current->filesystem->visibility($current->file);

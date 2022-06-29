@@ -29,7 +29,7 @@ final class FileData
     /** @var FilesystemOperator */
     public $filesystem;
 
-    /** @var array<string, int|string|bool> */
+    /** @var array<string, int|string|bool|null> */
     public $config = [];
 
     /** @var resource|false */
@@ -72,6 +72,6 @@ final class FileData
 
     public function ignoreVisibilityErrors(): bool
     {
-        return (bool) $this->config[FlysystemStreamWrapper::IGNORE_VISIBILITY_ERROS];
+        return (bool) $this->config[FlysystemStreamWrapper::IGNORE_VISIBILITY_ERRORS];
     }
 }

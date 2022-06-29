@@ -86,7 +86,7 @@ class AdapterWithoutVisibilitySupportTest extends AbstractStreamCommandTest
 
     private function ignoreVisibilityErrors(FileData $current): void
     {
-        FlysystemStreamWrapper::$config[AbstractStreamCommandTest::TEST_PROTOCOL][FlysystemStreamWrapper::IGNORE_VISIBILITY_ERROS] = true;
-        $current->config[FlysystemStreamWrapper::IGNORE_VISIBILITY_ERROS] = true;
+        FlysystemStreamWrapper::$config[AbstractStreamCommandTest::TEST_PROTOCOL][FlysystemStreamWrapper::IGNORE_VISIBILITY_ERRORS] = true;
+        $current->config[FlysystemStreamWrapper::IGNORE_VISIBILITY_ERRORS] = true;
     }
 }

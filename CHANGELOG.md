@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased]
+- adjusted uid & git retrieval 
+- added manual uid & gid setup
+- allow to access parameters of [`PortableVisibilityConverter`](https://flysystem.thephpleague.com/docs/usage/unix-visibility/)
+- fixed typo in const `IGNORE_VISIBILITY_ERRORS`
+
 ## [1.2.1] - 2022-06-10
 - added intl for dev to fix ecs dependency
 - fix for resources closed by flysystem prematurely
@@ -31,6 +37,7 @@
 - ...
 --->
 
+[Unreleased]: https://github.com/m2mtech/flysystem-stream-wrapper/compare/v1.2.1...HEAD
 [1.2.1]: https://github.com/m2mtech/flysystem-stream-wrapper/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/m2mtech/flysystem-stream-wrapper/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/m2mtech/flysystem-stream-wrapper/compare/v1.0.3...v1.1.0
