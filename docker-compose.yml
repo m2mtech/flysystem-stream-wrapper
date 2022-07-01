@@ -14,6 +14,12 @@ services:
       context: .
       dockerfile: docker/php8.1/Dockerfile
 
+  php82:
+    <<: *php
+    build:
+      context: .
+      dockerfile: docker/php8.2/Dockerfile
+
   php74:
     <<: *php
     build:
