@@ -1,4 +1,4 @@
-FROM php:8.2.0alpha2-cli-alpine
+FROM php:8.2-rc-cli-alpine
 WORKDIR /app
 RUN apk add --no-cache --virtual .persistent-deps \
     bash \

@@ -9,9 +9,7 @@ This package provides a stream wrapper for Flysystem V2 & V3.
 
 ## Flysystem V1
 
-If you're looking for Flysystem 1.x support, check out the [twistor/flysystem-stream-wrapper](https://github.com/twistor/flysystem-stream-wrapper), on which this package is based on.
-
-This project is a complete rewrite and has just the name and the functionality as stream wrapper in common with the V1 package. Please note that there is also a recent [pull request for V2](https://github.com/twistor/flysystem-stream-wrapper/pull/26) waiting though the last merge seems to be from November 2018. Thus, a new package seemed to be reasonable.
+If you're looking for Flysystem 1.x support, check out the [twistor/flysystem-stream-wrapper](https://github.com/twistor/flysystem-stream-wrapper).
 
 ## Installation
 
