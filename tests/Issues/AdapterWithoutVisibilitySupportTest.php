@@ -19,6 +19,7 @@ use M2MTech\FlysystemStreamWrapper\FlysystemStreamWrapper;
 use M2MTech\FlysystemStreamWrapper\Tests\Assert;
 use M2MTech\FlysystemStreamWrapper\Tests\StreamCommand\AbstractStreamCommandTest;
 use PHPUnit\Framework\MockObject\MockObject;
+use TypeError;
 
 class AdapterWithoutVisibilitySupportTest extends AbstractStreamCommandTest
 {
@@ -79,6 +80,43 @@ class AdapterWithoutVisibilitySupportTest extends AbstractStreamCommandTest
             ->method('visibility')
             ->with('test')
             ->willThrowException(UnableToRetrieveMetadata::visibility($current->file));
+
+        $stats = StreamStatCommand::getRemoteStats($current);
+        $this->assertSame(0100644, $stats[0]);
+    }
+
+
+    public function testVisibilityForDirectoryOnTypeError(): void
+    {
+        $current = $this->getCurrent();
+        $this->ignoreVisibilityErrors($current);
+
+        /** @var MockObject $filesystem */
+        $filesystem = $current->filesystem;
+        $filesystem->expects($this->exactly(1))
+            ->method('mimeType')
+            ->with('test')
+            ->willReturn('directory');
+        $filesystem->expects($this->exactly(1))
+            ->method('visibility')
+            ->with('test')
+            ->willThrowException(new TypeError('Return value must be of type string, null returned'));
+
+        $stats = StreamStatCommand::getRemoteStats($current);
+        $this->assertSame(040755, $stats[0]);
+    }
+
+    public function testVisibilityForFileOnTypeError(): void
+    {
+        $current = $this->getCurrent();
+        $this->ignoreVisibilityErrors($current);
+
+        /** @var MockObject $filesystem */
+        $filesystem = $current->filesystem;
+        $filesystem->expects($this->exactly(1))
+            ->method('visibility')
+            ->with('test')
+            ->willThrowException(new TypeError('Return value must be of type string, null returned'));
 
         $stats = StreamStatCommand::getRemoteStats($current);
         $this->assertSame(0100644, $stats[0]);
