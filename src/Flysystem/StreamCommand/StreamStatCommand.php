@@ -16,6 +16,7 @@ use League\Flysystem\Visibility;
 use M2MTech\FlysystemStreamWrapper\Flysystem\Exception\StatFailedException;
 use M2MTech\FlysystemStreamWrapper\Flysystem\FileData;
 use M2MTech\FlysystemStreamWrapper\FlysystemStreamWrapper;
+use TypeError;
 
 final class StreamStatCommand
 {
@@ -114,7 +115,7 @@ final class StreamStatCommand
 
         try {
             $visibility = $current->filesystem->visibility($current->file);
-        } catch (UnableToRetrieveMetadata $e) {
+        } catch (UnableToRetrieveMetadata | TypeError $e) {
             if (!$current->ignoreVisibilityErrors()) {
                 throw $e;
             }
