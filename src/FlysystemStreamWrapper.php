@@ -55,7 +55,7 @@ final class FlysystemStreamWrapper
     /** @var array <string, array<string, int|string|bool|null>> */
     public static $config = [];
 
-    /** @param array<string, int|string> $configuration */
+    /** @param array<string, bool|int|string> $configuration */
     public static function register(
         string $protocol,
         FilesystemOperator $filesystem,
