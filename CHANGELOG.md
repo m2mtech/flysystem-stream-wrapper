@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 - fixed phpunit deprecations  
+- updated (c) dates
 
 ## [1.3.1] - 2022-08-12
 - intercept TypeError when adapter returns null for visibility
