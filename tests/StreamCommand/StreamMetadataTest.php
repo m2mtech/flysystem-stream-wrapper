@@ -13,10 +13,13 @@ use League\Flysystem\UnableToSetVisibility;
 use League\Flysystem\UnableToWriteFile;
 use League\Flysystem\Visibility;
 use M2MTech\FlysystemStreamWrapper\Flysystem\StreamCommand\StreamMetadataCommand;
+use M2MTech\FlysystemStreamWrapper\Tests\Assert;
 use PHPUnit\Framework\MockObject\MockObject;
 
 class StreamMetadataTest extends AbstractStreamCommandTest
 {
+    use Assert;
+
     public function test(): void
     {
         $current = $this->getCurrent();
@@ -73,8 +76,7 @@ class StreamMetadataTest extends AbstractStreamCommandTest
             @StreamMetadataCommand::run($current, self::TEST_PATH, STREAM_META_ACCESS, 0600)
         );
 
-        $this->expectError();
-        $this->expectErrorMessage('Unable to change permissions');
+        $this->expectErrorWithMessage('Unable to change permissions');
         StreamMetadataCommand::run($current, self::TEST_PATH, STREAM_META_ACCESS, 0600);
     }
 
@@ -110,8 +112,7 @@ class StreamMetadataTest extends AbstractStreamCommandTest
             @StreamMetadataCommand::run($current, self::TEST_PATH, STREAM_META_TOUCH, 'ignored')
         );
 
-        $this->expectError();
-        $this->expectErrorMessage('Unable to write to file');
+        $this->expectErrorWithMessage('Unable to write to file');
         StreamMetadataCommand::run($current, self::TEST_PATH, STREAM_META_TOUCH, 'ignored');
     }
 

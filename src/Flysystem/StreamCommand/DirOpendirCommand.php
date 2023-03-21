@@ -25,7 +25,6 @@ final class DirOpendirCommand
     public static function run(FileData $current, string $path, int $options): bool
     {
         $current->setPath($path);
-
         try {
             self::getDir($current);
         } catch (FilesystemException $e) {
@@ -34,7 +33,14 @@ final class DirOpendirCommand
             );
         }
 
-        return is_dir($path);
+        $valid = @is_dir($path);
+        if (!$valid) {
+            return self::triggerError(
+                DirectoryNotFoundException::atLocation(self::OPENDIR_COMMAND, $path)
+            );
+        }
+
+        return true;
     }
 
     /** @throws FilesystemException */

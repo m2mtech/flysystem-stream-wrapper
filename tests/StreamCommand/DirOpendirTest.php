@@ -14,10 +14,13 @@ use League\Flysystem\FilesystemException;
 use League\Flysystem\SymbolicLinkEncountered;
 use M2MTech\FlysystemStreamWrapper\Flysystem\FileData;
 use M2MTech\FlysystemStreamWrapper\Flysystem\StreamCommand\DirOpendirCommand;
+use M2MTech\FlysystemStreamWrapper\Tests\Assert;
 use PHPUnit\Framework\MockObject\MockObject;
 
 class DirOpendirTest extends AbstractStreamCommandTest
 {
+    use Assert;
+
     public function test(): void
     {
         $this->getFilesystem([
@@ -39,6 +42,7 @@ class DirOpendirTest extends AbstractStreamCommandTest
             'mimeType' => 'file',
         ]);
 
+        $this->expectErrorWithMessage('/Failed to open dir/i');
         $this->assertFalse(DirOpendirCommand::run(
             new FileData(),
             self::TEST_PATH,
@@ -53,9 +57,8 @@ class DirOpendirTest extends AbstractStreamCommandTest
         $filesystem->method('listContents')
             ->willThrowException(SymbolicLinkEncountered::atLocation(self::TEST_PATH));
 
-        $this->expectError();
-        $this->expectErrorMessage('Unsupported symbolic link encountered');
-        $this->expectErrorMessageMatches('/Failed to open dir/i');
+        $this->expectErrorWithMessage('Unsupported symbolic link encountered');
+        $this->expectErrorWithMessage('/Failed to open dir/i');
         DirOpendirCommand::run(new FileData(), self::TEST_PATH, 42);
     }
 

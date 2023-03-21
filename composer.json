@@ -36,9 +36,9 @@
         "amphp/sync": "^1.4",
         "fakerphp/faker": "^1.19",
         "opis/closure": "^3.6",
-        "phpstan/phpstan": "^1.8",
+        "phpstan/phpstan": "^1.10",
         "phpunit/php-invoker": "^2.0|^3.1",
-        "phpunit/phpunit": "^8.5|^9.5",
+        "phpunit/phpunit": "^8.5|^9.6",
         "symplify/easy-coding-standard": "^11.0"
     },
     "autoload": {

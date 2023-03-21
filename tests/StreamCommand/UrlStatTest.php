@@ -11,10 +11,13 @@ namespace M2MTech\FlysystemStreamWrapper\Tests\StreamCommand;
 
 use League\Flysystem\Visibility;
 use M2MTech\FlysystemStreamWrapper\Flysystem\StreamCommand\UrlStatCommand;
+use M2MTech\FlysystemStreamWrapper\Tests\Assert;
 use PHPUnit\Framework\MockObject\MockObject;
 
 class UrlStatTest extends AbstractStreamCommandTest
 {
+    use Assert;
+
     public function test(): void
     {
         $current = $this->getCurrent();
@@ -35,8 +38,7 @@ class UrlStatTest extends AbstractStreamCommandTest
 
         $this->assertFalse(@UrlStatCommand::run($current, self::TEST_PATH, 0));
 
-        $this->expectError();
-        $this->expectErrorMessage('Stat failed');
+        $this->expectErrorWithMessage('Stat failed');
         UrlStatCommand::run($current, self::TEST_PATH, 0);
     }
 

@@ -35,8 +35,7 @@ class RmdirTest extends AbstractFileCommandTest
         $this->assertFalse(@rmdir($dir->flysystem));
         $this->assertDirectoryExists($dir->local);
 
-        $this->expectError();
-        $this->expectErrorMessage('Directory not empty');
+        $this->expectErrorWithMessage('Directory not empty');
         rmdir($dir->flysystem);
     }
 
@@ -46,8 +45,7 @@ class RmdirTest extends AbstractFileCommandTest
         $this->assertFalse(@rmdir($this->testDir->flysystem.'/'));
         $this->assertDirectoryExists($this->testDir->local);
 
-        $this->expectError();
-        $this->expectErrorMessage('Directory is root');
+        $this->expectErrorWithMessage('Directory is root');
         rmdir($this->testDir->flysystem);
     }
 }

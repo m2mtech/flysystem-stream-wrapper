@@ -29,15 +29,6 @@ class StreamCloseTest extends AbstractStreamCommandTest
         $this->assertIsClosedResource($current->handle);
     }
 
-//    public function testInvalidResource(): void
-//    {
-//        $wrapper = new StreamWrapper();
-//
-//        $this->expectError();
-//        $this->expectErrorMessage('not a valid stream resource');
-//        $wrapper->stream_close();
-//    }
-
     public function testWriteLocalCopy(): void
     {
         $current = $this->getCurrent();
@@ -68,8 +59,7 @@ class StreamCloseTest extends AbstractStreamCommandTest
         $filesystem->method('writeStream')
             ->willThrowException(UnableToWriteFile::atLocation(self::TEST_PATH));
 
-        $this->expectError();
-        $this->expectErrorMessage('Unable to sync file');
+        $this->expectErrorWithMessage('Unable to sync file');
         $wrapper->stream_close();
     }
 }

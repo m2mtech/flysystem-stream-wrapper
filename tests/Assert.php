@@ -9,6 +9,8 @@
 
 namespace M2MTech\FlysystemStreamWrapper\Tests;
 
+use RuntimeException;
+
 /**
  * @method assertDirectoryDoesNotExist(string $local)
  * @method assertFileDoesNotExist(string $file)
@@ -19,7 +21,7 @@ trait Assert
 {
     public function assertPermission(string $file, int $permission): void
     {
-        clearstatcache(false);
+        clearstatcache();
 
         $this->assertSame(decoct($permission & 0777), decoct(fileperms($file) & 0777));
     }
@@ -43,6 +45,29 @@ trait Assert
         }
         if ('assertIsClosedResource' === $method) {
             $this->assertIsResource(...$args);
+        }
+    }
+
+    public function expectErrorWithMessage(string $message, int $code = E_USER_WARNING): void
+    {
+        set_error_handler(
+            static function (int $errorCode, string $errorMessage) use ($code) {
+                if ($code !== $errorCode) {
+                    return true;
+                }
+
+                restore_error_handler();
+
+                throw new RuntimeException($errorMessage, $errorCode);
+            },
+            E_ALL
+        );
+
+        $this->expectException(RuntimeException::class);
+        if (0 === strpos($message, '/')) {
+            $this->expectExceptionMessageMatches($message);
+        } else {
+            $this->expectExceptionMessage($message);
         }
     }
 }

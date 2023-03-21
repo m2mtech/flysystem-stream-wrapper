@@ -9,8 +9,12 @@
 
 namespace M2MTech\FlysystemStreamWrapper\Tests\FileCommand;
 
+use M2MTech\FlysystemStreamWrapper\Tests\Assert;
+
 class FiletypeTest extends AbstractFileCommandTest
 {
+    use Assert;
+
     public function test(): void
     {
         $file = $this->testDir->createFile(true);
@@ -25,8 +29,7 @@ class FiletypeTest extends AbstractFileCommandTest
         $file = $this->testDir->createFile();
         $this->assertFalse(@filetype($file->flysystem));
 
-        $this->expectError();
-        $this->expectErrorMessage('Stat failed');
+        $this->expectErrorWithMessage('Stat failed');
         /** @noinspection PhpUnusedLocalVariableInspection */
         $type = filetype($file->flysystem);
     }

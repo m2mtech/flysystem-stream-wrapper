@@ -24,16 +24,14 @@ class OpendirTest extends AbstractFileCommandTest
     public function testNoDirectory(): void
     {
         $dir = $this->testDir->createDirectory();
-        $this->expectError();
-        $this->expectErrorMessageMatches('/Failed to open dir/i');
+        $this->expectErrorWithMessage('/Failed to open dir/i');
         opendir($dir->flysystem);
     }
 
     public function testFile(): void
     {
         $dir = $this->testDir->createFile(true);
-        $this->expectError();
-        $this->expectErrorMessageMatches('/Failed to open dir/i');
+        $this->expectErrorWithMessage('/Failed to open dir/i', E_WARNING);
         opendir($dir->flysystem);
     }
 }

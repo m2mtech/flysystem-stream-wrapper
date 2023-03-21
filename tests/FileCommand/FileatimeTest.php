@@ -9,8 +9,12 @@
 
 namespace M2MTech\FlysystemStreamWrapper\Tests\FileCommand;
 
+use M2MTech\FlysystemStreamWrapper\Tests\Assert;
+
 class FileatimeTest extends AbstractFileCommandTest
 {
+    use Assert;
+
     public function test(): void
     {
         $file = $this->testDir->createFile(true);
@@ -22,8 +26,7 @@ class FileatimeTest extends AbstractFileCommandTest
         $file = $this->testDir->createFile();
         $this->assertFalse(@fileatime($file->flysystem));
 
-        $this->expectError();
-        $this->expectErrorMessage('Stat failed');
+        $this->expectErrorWithMessage('Stat failed');
         /** @noinspection PhpUnusedLocalVariableInspection */
         $time = fileatime($file->flysystem);
     }

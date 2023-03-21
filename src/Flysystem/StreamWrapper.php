@@ -53,10 +53,6 @@ final class StreamWrapper
     public function stream_close(): void
     {
         if (!is_resource($this->current->handle)) {
-//            trigger_error(
-//                'stream_close(): Supplied resource is not a valid stream resource',
-//                E_USER_WARNING
-//            );
             return;
         }
 

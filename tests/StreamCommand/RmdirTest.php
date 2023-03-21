@@ -13,10 +13,13 @@ use League\Flysystem\DirectoryListing;
 use League\Flysystem\FileAttributes;
 use League\Flysystem\UnableToDeleteDirectory;
 use M2MTech\FlysystemStreamWrapper\Flysystem\StreamCommand\RmdirCommand;
+use M2MTech\FlysystemStreamWrapper\Tests\Assert;
 use PHPUnit\Framework\MockObject\MockObject;
 
 class RmdirTest extends AbstractStreamCommandTest
 {
+    use Assert;
+
     public function test(): void
     {
         $current = $this->getCurrent();
@@ -46,8 +49,7 @@ class RmdirTest extends AbstractStreamCommandTest
 
         $this->assertFalse(@RmdirCommand::run($current, self::TEST_PROTOCOL.'://'.$dir, 0));
 
-        $this->expectError();
-        $this->expectErrorMessage('Directory is root');
+        $this->expectErrorWithMessage('Directory is root');
         RmdirCommand::run($current, self::TEST_PROTOCOL.'://'.$dir, 0);
     }
 
@@ -65,8 +67,7 @@ class RmdirTest extends AbstractStreamCommandTest
 
         $this->assertFalse(@RmdirCommand::run($current, $current->path, 0));
 
-        $this->expectError();
-        $this->expectErrorMessage('Directory not empty');
+        $this->expectErrorWithMessage('Directory not empty');
         RmdirCommand::run($current, $current->path, 0);
     }
 
@@ -82,8 +83,7 @@ class RmdirTest extends AbstractStreamCommandTest
 
         $this->assertFalse(@RmdirCommand::run($current, $current->path, 0));
 
-        $this->expectError();
-        $this->expectErrorMessageMatches('/(Could not remove directory|Directory not empty)/');
+        $this->expectErrorWithMessage('/(Could not remove directory|Directory not empty)/');
         RmdirCommand::run($current, $current->path, 0);
     }
 }

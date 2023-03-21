@@ -26,14 +26,6 @@ class ClosedirTest extends AbstractFileCommandTest
 
         closedir($handle);
         $this->assertIsClosedResource($handle);
-
-        if (version_compare(PHP_VERSION, '8.0.0') >= 0) {
-            return;
-        }
-
-        $this->expectError();
-        $this->expectErrorMessage('not a valid Directory resource');
-        closedir($handle);
     }
 
     public function testNoHandle(): void

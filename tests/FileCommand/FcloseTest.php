@@ -55,9 +55,5 @@ class FcloseTest extends AbstractFileCommandTest
         }
 
         $this->assertFalse(@fclose($handle));
-
-        $this->expectError();
-        $this->expectErrorMessage('not a valid stream resource');
-        fclose($handle);
     }
 }

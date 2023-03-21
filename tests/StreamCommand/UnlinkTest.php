@@ -11,10 +11,13 @@ namespace M2MTech\FlysystemStreamWrapper\Tests\StreamCommand;
 
 use League\Flysystem\UnableToDeleteFile;
 use M2MTech\FlysystemStreamWrapper\Flysystem\StreamCommand\UnlinkCommand;
+use M2MTech\FlysystemStreamWrapper\Tests\Assert;
 use PHPUnit\Framework\MockObject\MockObject;
 
 class UnlinkTest extends AbstractStreamCommandTest
 {
+    use Assert;
+
     public function test(): void
     {
         $current = $this->getCurrent([
@@ -31,8 +34,7 @@ class UnlinkTest extends AbstractStreamCommandTest
 
         $this->assertFalse(@UnlinkCommand::run($current, self::TEST_PATH));
 
-        $this->expectError();
-        $this->expectErrorMessage('No such file or directory');
+        $this->expectErrorWithMessage('No such file or directory');
         UnlinkCommand::run($current, self::TEST_PATH);
     }
 
@@ -51,8 +53,7 @@ class UnlinkTest extends AbstractStreamCommandTest
 
         $this->assertFalse(@UnlinkCommand::run($current, self::TEST_PATH));
 
-        $this->expectError();
-        $this->expectErrorMessage('Could not delete file');
+        $this->expectErrorWithMessage('Could not delete file');
         UnlinkCommand::run($current, self::TEST_PATH);
     }
 }

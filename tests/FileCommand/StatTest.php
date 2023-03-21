@@ -9,8 +9,12 @@
 
 namespace M2MTech\FlysystemStreamWrapper\Tests\FileCommand;
 
+use M2MTech\FlysystemStreamWrapper\Tests\Assert;
+
 class StatTest extends AbstractStatTest
 {
+    use Assert;
+
     public function test(): void
     {
         $file = $this->testDir->createFile(true);
@@ -32,8 +36,7 @@ class StatTest extends AbstractStatTest
         $file = $this->testDir->createFile();
         $this->assertFalse(@stat($file->flysystem));
 
-        $this->expectError();
-        $this->expectErrorMessage('stat failed for');
+        $this->expectErrorWithMessage('Stat failed');
         /** @noinspection PhpUnusedLocalVariableInspection */
         $stat = stat($file->flysystem);
     }

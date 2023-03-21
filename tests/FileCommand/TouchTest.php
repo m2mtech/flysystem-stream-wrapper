@@ -42,7 +42,7 @@ class TouchTest extends AbstractFileCommandTest
         FlysystemStreamWrapper::register('fail', $filesystem);
         $this->assertFalse(@touch('fail://path'));
 
-        $this->expectError();
+        $this->expectErrorWithMessage('Unable to write to file');
         touch('fail://path');
     }
 }

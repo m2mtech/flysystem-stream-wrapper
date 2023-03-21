@@ -13,10 +13,13 @@ use League\Flysystem\FilesystemException;
 use League\Flysystem\UnableToRetrieveMetadata;
 use League\Flysystem\Visibility;
 use M2MTech\FlysystemStreamWrapper\Flysystem\StreamCommand\StreamStatCommand;
+use M2MTech\FlysystemStreamWrapper\Tests\Assert;
 use PHPUnit\Framework\MockObject\MockObject;
 
 class StreamStatTest extends AbstractStreamCommandTest
 {
+    use Assert;
+
     public function test(): void
     {
         $current = $this->getCurrent();
@@ -162,8 +165,7 @@ class StreamStatTest extends AbstractStreamCommandTest
 
         $this->assertFalse(@StreamStatCommand::run($current));
 
-        $this->expectError();
-        $this->expectErrorMessage('Stat failed');
+        $this->expectErrorWithMessage('Stat failed');
         StreamStatCommand::run($current);
     }
 

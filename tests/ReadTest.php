@@ -13,6 +13,8 @@ use M2MTech\FlysystemStreamWrapper\Tests\FileCommand\AbstractFileCommandTest;
 
 class ReadTest extends AbstractFileCommandTest
 {
+    use Assert;
+
     public function test(): void
     {
         $file = $this->testDir->createFile(true);
@@ -30,8 +32,7 @@ class ReadTest extends AbstractFileCommandTest
             return;
         }
 
-        $this->expectError();
-        $this->expectErrorMessage('Bad file descriptor');
+        $this->expectErrorWithMessage('Bad file descriptor', E_NOTICE);
         fwrite($handle, 'more content');
     }
 

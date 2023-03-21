@@ -50,8 +50,7 @@ class MkdirTest extends AbstractFileCommandTest
         $dir = $this->testDir->createDirectory(true);
         $this->assertFalse(@mkdir($dir->flysystem));
 
-        $this->expectError();
-        $this->expectErrorMessage('Directory exists');
+        $this->expectErrorWithMessage('Directory exists');
         mkdir($dir->flysystem);
     }
 }

@@ -31,8 +31,7 @@ class UnlinkTest extends AbstractFileCommandTest
         $dir = $this->testDir->createDirectory(true);
         $this->assertFalse(@unlink($dir->flysystem));
 
-        $this->expectError();
-        $this->expectErrorMessage('Could not delete file');
+        $this->expectErrorWithMessage('Could not delete file');
         unlink($dir->flysystem);
     }
 }

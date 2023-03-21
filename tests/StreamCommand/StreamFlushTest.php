@@ -12,10 +12,13 @@ namespace M2MTech\FlysystemStreamWrapper\Tests\StreamCommand;
 use League\Flysystem\UnableToWriteFile;
 use M2MTech\FlysystemStreamWrapper\Flysystem\StreamCommand\StreamWriteCommand;
 use M2MTech\FlysystemStreamWrapper\Flysystem\StreamWrapper;
+use M2MTech\FlysystemStreamWrapper\Tests\Assert;
 use PHPUnit\Framework\MockObject\MockObject;
 
 class StreamFlushTest extends AbstractStreamCommandTest
 {
+    use Assert;
+
     public function test(): void
     {
         $current = $this->getCurrent();
@@ -34,8 +37,7 @@ class StreamFlushTest extends AbstractStreamCommandTest
     {
         $wrapper = new StreamWrapper();
 
-        $this->expectError();
-        $this->expectErrorMessage('not a valid stream resource');
+        $this->expectErrorWithMessage('not a valid stream resource');
         $wrapper->stream_flush();
     }
 
@@ -69,8 +71,7 @@ class StreamFlushTest extends AbstractStreamCommandTest
         $filesystem->method('writeStream')
             ->willThrowException(UnableToWriteFile::atLocation(self::TEST_PATH));
 
-        $this->expectError();
-        $this->expectErrorMessage('Unable to sync file');
+        $this->expectErrorWithMessage('Unable to sync file');
         $wrapper->stream_flush();
     }
 }

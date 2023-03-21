@@ -13,11 +13,11 @@ class FtellTest extends AbstractFileCommandTest
 {
     use DataProvider;
 
-//    /**
-//     * @dataProvider readOnlyModeProvider
-//     * @dataProvider readWriteModeProvider
-//     * @dataProvider writeOnlyModeProvider
-//     */
+    /**
+     * @dataProvider readOnlyModeProvider
+     * @dataProvider readWriteModeProvider
+     * @dataProvider writeOnlyModeProvider
+     */
     public function test(string $mode = 'a'): void
     {
         $file = $this->testDir->createFile(true);

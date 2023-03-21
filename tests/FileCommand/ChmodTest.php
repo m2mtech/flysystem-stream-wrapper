@@ -43,7 +43,7 @@ class ChmodTest extends AbstractFileCommandTest
         FlysystemStreamWrapper::register('fail', $filesystem);
         $this->assertFalse(@chmod('fail://path', 0777));
 
-        $this->expectError();
+        $this->expectErrorWithMessage('Unable to change permissions');
         chmod('fail://path', 0777);
     }
 }

@@ -53,8 +53,7 @@ class RenameTest extends AbstractFileCommandTest
 
         $this->assertFalse(@rename($old->flysystem, $new->flysystem));
 
-        $this->expectError();
-        $this->expectErrorMessage('No such file or directory');
+        $this->expectErrorWithMessage('No such file or directory');
         rename($old->flysystem, $new->flysystem);
     }
 
@@ -91,8 +90,7 @@ class RenameTest extends AbstractFileCommandTest
 
         $this->assertFalse(@rename($old->flysystem, $new->flysystem));
 
-        $this->expectError();
-        $this->expectErrorMessage('Directory not empty');
+        $this->expectErrorWithMessage('Directory not empty');
         rename($old->flysystem, $new->flysystem);
     }
 
@@ -103,8 +101,7 @@ class RenameTest extends AbstractFileCommandTest
 
         $this->assertFalse(@rename($file->flysystem, $dir->flysystem));
 
-        $this->expectError();
-        $this->expectErrorMessage('Is a directory');
+        $this->expectErrorWithMessage('Is a directory');
         rename($file->flysystem, $dir->flysystem);
     }
 
@@ -115,8 +112,7 @@ class RenameTest extends AbstractFileCommandTest
 
         $this->assertFalse(@rename($dir->flysystem, $file->flysystem));
 
-        $this->expectError();
-        $this->expectErrorMessage('Not a directory');
+        $this->expectErrorWithMessage('Not a directory');
         rename($dir->flysystem, $file->flysystem);
     }
 }

@@ -19,10 +19,13 @@ use function Amp\Promise\all;
 use function Amp\Promise\wait;
 use Amp\Sync\SyncException;
 use M2MTech\FlysystemStreamWrapper\Flysystem\StreamCommand\StreamLockCommand;
+use M2MTech\FlysystemStreamWrapper\Tests\Assert;
 use Throwable;
 
 class StreamLockTest extends AbstractStreamCommandTest
 {
+    use Assert;
+
     /** @small */
     public function test(): void
     {
@@ -119,7 +122,7 @@ class StreamLockTest extends AbstractStreamCommandTest
         $this->assertSame([1, 2], $result);
 
         if (version_compare(PHP_VERSION, '8.0.0') >= 0) {
-            $this->expectError();
+            $this->expectErrorWithMessage('is deprecated', E_DEPRECATED);
         }
     }
 }

@@ -13,10 +13,13 @@ use League\Flysystem\Config;
 use League\Flysystem\UnableToCreateDirectory;
 use League\Flysystem\Visibility;
 use M2MTech\FlysystemStreamWrapper\Flysystem\StreamCommand\MkdirCommand;
+use M2MTech\FlysystemStreamWrapper\Tests\Assert;
 use PHPUnit\Framework\MockObject\MockObject;
 
 class MkdirTest extends AbstractStreamCommandTest
 {
+    use Assert;
+
     public function test(): void
     {
         $current = $this->getCurrent();
@@ -44,8 +47,7 @@ class MkdirTest extends AbstractStreamCommandTest
 
         $this->assertFalse(@MkdirCommand::run($current, self::TEST_PATH, 0777, 42));
 
-        $this->expectError();
-        $this->expectErrorMessage('Directory exists');
+        $this->expectErrorWithMessage('Directory exists');
         MkdirCommand::run($current, self::TEST_PATH, 0777, 42);
     }
 
@@ -85,8 +87,7 @@ class MkdirTest extends AbstractStreamCommandTest
 
         $this->assertFalse(@MkdirCommand::run($current, self::TEST_PATH, 0777, 42));
 
-        $this->expectError();
-        $this->expectErrorMessage('Cannot create directory');
+        $this->expectErrorWithMessage('Cannot create directory');
         MkdirCommand::run($current, self::TEST_PATH, 0777, 42);
     }
 }

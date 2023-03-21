@@ -11,10 +11,13 @@ namespace M2MTech\FlysystemStreamWrapper\Tests\StreamCommand;
 
 use League\Flysystem\UnableToMoveFile;
 use M2MTech\FlysystemStreamWrapper\Flysystem\StreamCommand\RenameCommand;
+use M2MTech\FlysystemStreamWrapper\Tests\Assert;
 use PHPUnit\Framework\MockObject\MockObject;
 
 class RenameTest extends AbstractStreamCommandTest
 {
+    use Assert;
+
     public function test(): void
     {
         $current = $this->getCurrent([
@@ -36,8 +39,7 @@ class RenameTest extends AbstractStreamCommandTest
 
         $this->assertFalse(@RenameCommand::run($current, self::TEST_PATH, 'test://new'));
 
-        $this->expectError();
-        $this->expectErrorMessage('No such file or directory');
+        $this->expectErrorWithMessage('No such file or directory');
         RenameCommand::run($current, self::TEST_PATH, 'test://new');
     }
 
@@ -59,8 +61,7 @@ class RenameTest extends AbstractStreamCommandTest
 
         $this->assertFalse(@RenameCommand::run($current, self::TEST_PATH, 'test://new'));
 
-        $this->expectError();
-        $this->expectErrorMessage('Is a directory');
+        $this->expectErrorWithMessage('Is a directory');
         RenameCommand::run($current, self::TEST_PATH, 'test://new');
     }
 
@@ -82,8 +83,7 @@ class RenameTest extends AbstractStreamCommandTest
 
         $this->assertFalse(@RenameCommand::run($current, self::TEST_PATH, 'test://new'));
 
-        $this->expectError();
-        $this->expectErrorMessage('Not a directory');
+        $this->expectErrorWithMessage('Not a directory');
         RenameCommand::run($current, self::TEST_PATH, 'test://new');
     }
 

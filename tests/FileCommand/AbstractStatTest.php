@@ -24,6 +24,7 @@ abstract class AbstractStatTest extends AbstractFileCommandTest
     {
         static $stats = [];
         if (!$stats) {
+            $stats = [];
             foreach (self::STATS_ZERO as $key) {
                 $stats[$key] = 0;
             }
