@@ -9,9 +9,9 @@
 
 namespace M2MTech\FlysystemStreamWrapper\Tests;
 
-use M2MTech\FlysystemStreamWrapper\Tests\FileCommand\AbstractFileCommandTest;
+use M2MTech\FlysystemStreamWrapper\Tests\FileCommand\AbstractFileCommandTestCase;
 
-class ReadTest extends AbstractFileCommandTest
+class ReadTest extends AbstractFileCommandTestCase
 {
     use Assert;
 

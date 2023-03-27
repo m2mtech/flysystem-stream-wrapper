@@ -18,7 +18,7 @@ use M2MTech\FlysystemStreamWrapper\Flysystem\StreamCommand\DirReaddirCommand;
 use M2MTech\FlysystemStreamWrapper\Flysystem\StreamCommand\DirRewinddirCommand;
 use PHPUnit\Framework\MockObject\MockObject;
 
-class DirRewinddirTest extends AbstractStreamCommandTest
+class DirRewinddirTest extends AbstractStreamCommandTestCase
 {
     public function test(): void
     {

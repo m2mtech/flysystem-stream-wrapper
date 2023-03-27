@@ -11,9 +11,9 @@ namespace M2MTech\FlysystemStreamWrapper\Tests\Issues;
 
 use M2MTech\FlysystemStreamWrapper\Flysystem\StreamWrapper;
 use M2MTech\FlysystemStreamWrapper\Tests\Assert;
-use M2MTech\FlysystemStreamWrapper\Tests\StreamCommand\AbstractStreamCommandTest;
+use M2MTech\FlysystemStreamWrapper\Tests\StreamCommand\AbstractStreamCommandTestCase;
 
-class AdapterClosesStreamTest extends AbstractStreamCommandTest
+class AdapterClosesStreamTest extends AbstractStreamCommandTestCase
 {
     use Assert;
 

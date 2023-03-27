@@ -14,7 +14,7 @@ use League\Flysystem\UnableToSetVisibility;
 use M2MTech\FlysystemStreamWrapper\FlysystemStreamWrapper;
 use M2MTech\FlysystemStreamWrapper\Tests\Assert;
 
-class ChmodTest extends AbstractFileCommandTest
+class ChmodTest extends AbstractFileCommandTestCase
 {
     use Assert;
 

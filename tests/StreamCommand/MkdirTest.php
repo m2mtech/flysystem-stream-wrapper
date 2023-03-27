@@ -16,7 +16,7 @@ use M2MTech\FlysystemStreamWrapper\Flysystem\StreamCommand\MkdirCommand;
 use M2MTech\FlysystemStreamWrapper\Tests\Assert;
 use PHPUnit\Framework\MockObject\MockObject;
 
-class MkdirTest extends AbstractStreamCommandTest
+class MkdirTest extends AbstractStreamCommandTestCase
 {
     use Assert;
 
@@ -27,12 +27,7 @@ class MkdirTest extends AbstractStreamCommandTest
         $filesystem = $current->filesystem;
         $filesystem->expects($this->once())
             ->method('createDirectory')
-            ->with(
-                'test',
-                [
-                    Config::OPTION_VISIBILITY => Visibility::PUBLIC,
-                ]
-            );
+            ->with('test', [Config::OPTION_VISIBILITY => Visibility::PUBLIC]);
 
         $this->assertTrue(MkdirCommand::run($current, self::TEST_PATH, 0777, 42));
     }
@@ -51,30 +46,26 @@ class MkdirTest extends AbstractStreamCommandTest
         MkdirCommand::run($current, self::TEST_PATH, 0777, 42);
     }
 
-    public function testPermission(): void
+    /** @return array<array<int|string>> */
+    public static function permissionProvider(): array
+    {
+        return [
+            [Visibility::PUBLIC, 0777],
+            [Visibility::PRIVATE, 0700],
+        ];
+    }
+
+    /** @dataProvider permissionProvider */
+    public function testPermission(string $visibility, int $permission): void
     {
         $current = $this->getCurrent();
         /** @var MockObject $filesystem */
         $filesystem = $current->filesystem;
-        $filesystem->expects($this->exactly(2))
+        $filesystem->expects($this->once())
             ->method('createDirectory')
-            ->withConsecutive(
-                [
-                    'test',
-                    [
-                        Config::OPTION_VISIBILITY => Visibility::PUBLIC,
-                    ],
-                ],
-                [
-                    'test',
-                    [
-                        Config::OPTION_VISIBILITY => Visibility::PRIVATE,
-                    ],
-                ]
-            );
+            ->with('test', [Config::OPTION_VISIBILITY => $visibility]);
 
-        $this->assertTrue(MkdirCommand::run($current, self::TEST_PATH, 0777, 42));
-        $this->assertTrue(MkdirCommand::run($current, self::TEST_PATH, 0700, 42));
+        $this->assertTrue(MkdirCommand::run($current, self::TEST_PATH, $permission, 42));
     }
 
     public function testFailed(): void

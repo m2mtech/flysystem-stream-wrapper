@@ -22,7 +22,7 @@ use M2MTech\FlysystemStreamWrapper\Flysystem\StreamCommand\StreamLockCommand;
 use M2MTech\FlysystemStreamWrapper\Tests\Assert;
 use Throwable;
 
-class StreamLockTest extends AbstractStreamCommandTest
+class StreamLockTest extends AbstractStreamCommandTestCase
 {
     use Assert;
 

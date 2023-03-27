@@ -16,7 +16,7 @@ use M2MTech\FlysystemStreamWrapper\Flysystem\StreamCommand\StreamMetadataCommand
 use M2MTech\FlysystemStreamWrapper\Tests\Assert;
 use PHPUnit\Framework\MockObject\MockObject;
 
-class StreamMetadataTest extends AbstractStreamCommandTest
+class StreamMetadataTest extends AbstractStreamCommandTestCase
 {
     use Assert;
 
@@ -29,38 +29,33 @@ class StreamMetadataTest extends AbstractStreamCommandTest
         );
     }
 
-    public function testMetaAccess(): void
+    /** @return array<array<bool|int|string>> */
+    public static function metaAccessProvider(): array
+    {
+        return [
+            [false, Visibility::PRIVATE, 0600],
+            [false, Visibility::PUBLIC, 0644],
+            [true, Visibility::PRIVATE, 0600],
+            [true, Visibility::PUBLIC, 0644],
+        ];
+    }
+
+    /** @dataProvider metaAccessProvider */
+    public function testMetaAccess(bool $isDir, string $visibility, int $permissions): void
     {
         $current = $this->getCurrent();
         /** @var MockObject $filesystem */
         $filesystem = $current->filesystem;
-        $filesystem->expects($this->exactly(4))
+        $filesystem->expects($this->once())
             ->method('setVisibility')
-            ->withConsecutive(
-                ['test', Visibility::PRIVATE],
-                ['test', Visibility::PUBLIC]
-            );
+            ->with('test', $visibility);
+
+        if ($isDir) {
+            $filesystem->method('mimeType')->willReturn('directory');
+        }
 
         $this->assertTrue(
-            StreamMetadataCommand::run($current, self::TEST_PATH, STREAM_META_ACCESS, 0600)
-        );
-        $this->assertTrue(
-            StreamMetadataCommand::run($current, self::TEST_PATH, STREAM_META_ACCESS, 0644)
-        );
-
-        $filesystem->method('visibility')->willReturn('public');
-        $filesystem->method('mimeType')->willReturn('directory');
-        $filesystem->method('setVisibility')
-            ->withConsecutive(
-                ['test', Visibility::PRIVATE],
-                ['test', Visibility::PUBLIC]
-            );
-
-        $this->assertTrue(
-            StreamMetadataCommand::run($current, self::TEST_PATH, STREAM_META_ACCESS, 0700)
-        );
-        $this->assertTrue(
-            StreamMetadataCommand::run($current, self::TEST_PATH, STREAM_META_ACCESS, 0755)
+            StreamMetadataCommand::run($current, self::TEST_PATH, STREAM_META_ACCESS, $permissions)
         );
     }
 
@@ -117,7 +112,7 @@ class StreamMetadataTest extends AbstractStreamCommandTest
     }
 
     /** @return array<array<int>> */
-    public function metaOptionProvider(): array
+    public static function metaOptionProvider(): array
     {
         return [
             [STREAM_META_GROUP],

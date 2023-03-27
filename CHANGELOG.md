@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.3.3]
+- fixed tests for phpunit v10
+
 ## [1.3.2]
 - allow `bool` in `FlysystemStreamWrapper::register` configuration
 - fixed phpunit deprecations  
@@ -45,6 +48,7 @@
 - ...
 --->
 
+[1.3.3]: https://github.com/m2mtech/flysystem-stream-wrapper/compare/v1.3.2...v1.3.3
 [1.3.2]: https://github.com/m2mtech/flysystem-stream-wrapper/compare/v1.3.1...v1.3.2
 [1.3.1]: https://github.com/m2mtech/flysystem-stream-wrapper/compare/v1.3.0...v1.3.1
 [1.3.0]: https://github.com/m2mtech/flysystem-stream-wrapper/compare/v1.2.1...v1.3.0

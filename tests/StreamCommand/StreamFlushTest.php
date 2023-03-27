@@ -15,7 +15,7 @@ use M2MTech\FlysystemStreamWrapper\Flysystem\StreamWrapper;
 use M2MTech\FlysystemStreamWrapper\Tests\Assert;
 use PHPUnit\Framework\MockObject\MockObject;
 
-class StreamFlushTest extends AbstractStreamCommandTest
+class StreamFlushTest extends AbstractStreamCommandTestCase
 {
     use Assert;
 

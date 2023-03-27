@@ -9,7 +9,7 @@
 
 namespace M2MTech\FlysystemStreamWrapper\Tests\FileCommand;
 
-class FgetcTest extends AbstractFileCommandTest
+class FgetcTest extends AbstractFileCommandTestCase
 {
     use DataProvider;
 

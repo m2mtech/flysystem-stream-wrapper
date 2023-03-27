@@ -14,7 +14,7 @@ use M2MTech\FlysystemStreamWrapper\Flysystem\StreamCommand\RenameCommand;
 use M2MTech\FlysystemStreamWrapper\Tests\Assert;
 use PHPUnit\Framework\MockObject\MockObject;
 
-class RenameTest extends AbstractStreamCommandTest
+class RenameTest extends AbstractStreamCommandTestCase
 {
     use Assert;
 

@@ -12,37 +12,37 @@ namespace M2MTech\FlysystemStreamWrapper\Tests\FileCommand;
 trait DataProvider
 {
     /** @return array<array<bool>> */
-    public function trueFalseProvider(): array
+    public static function trueFalseProvider(): array
     {
         return [[true], [false]];
     }
 
     /** @return array<array<string>> */
-    public function readOnlyModeProvider(): array
+    public static function readOnlyModeProvider(): array
     {
         return [['r'], ['rb']];
     }
 
     /** @return array<array<string>> */
-    public function writeOnlyModeProvider(): array
+    public static function writeOnlyModeProvider(): array
     {
         return [['w'], ['a'], ['c']];
     }
 
     /** @return array<array<string>> */
-    public function exclusiveWriteOnlyModeProvider(): array
+    public static function exclusiveWriteOnlyModeProvider(): array
     {
         return [['x']];
     }
 
     /** @return array<array<string>> */
-    public function readWriteModeProvider(): array
+    public static function readWriteModeProvider(): array
     {
         return [['r+'], ['w+'], ['a+'], ['c+']];
     }
 
     /** @return array<array<string>> */
-    public function exclusiveReadWriteModeProvider(): array
+    public static function exclusiveReadWriteModeProvider(): array
     {
         return [['x+']];
     }

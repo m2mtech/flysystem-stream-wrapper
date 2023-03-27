@@ -11,7 +11,7 @@ namespace M2MTech\FlysystemStreamWrapper\Tests\FileCommand;
 
 use Faker\Factory as Faker;
 
-class ChgrpTest extends AbstractFileCommandTest
+class ChgrpTest extends AbstractFileCommandTestCase
 {
     public function test(): void
     {

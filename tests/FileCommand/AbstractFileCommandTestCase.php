@@ -16,7 +16,7 @@ use M2MTech\FlysystemStreamWrapper\Tests\Filesystem\TestDirectory;
 use M2MTech\FlysystemStreamWrapper\Tests\Filesystem\TestRootDirectory;
 use PHPUnit\Framework\TestCase;
 
-abstract class AbstractFileCommandTest extends TestCase
+abstract class AbstractFileCommandTestCase extends TestCase
 {
     /** @var TestDirectory */
     protected $testDir;

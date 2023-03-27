@@ -14,7 +14,7 @@ use M2MTech\FlysystemStreamWrapper\Flysystem\StreamCommand\UnlinkCommand;
 use M2MTech\FlysystemStreamWrapper\Tests\Assert;
 use PHPUnit\Framework\MockObject\MockObject;
 
-class UnlinkTest extends AbstractStreamCommandTest
+class UnlinkTest extends AbstractStreamCommandTestCase
 {
     use Assert;
 

@@ -78,7 +78,7 @@ FlysystemStreamWrapper::register('fly', $filesystem, [
 
 ## Testing
 
-This package has been developed for php 7.4 with compatibility tested for php 7.2 to 8.1.
+This package has been developed for php 7.4 with compatibility tested for php 7.2 to 8.2.
 
 ```bash
 # with php installed
@@ -86,6 +86,9 @@ composer test
 
 # or inside docker e.g. for php 7.4
 docker-compose run php74 composer test
+
+# note that phpunit v10 used stating php 8.1 will require to use a different config file:
+docker-compose run php81 vendor/bin/phpunit -c phpunit.10.xml
 ```
 
 ## Changelog

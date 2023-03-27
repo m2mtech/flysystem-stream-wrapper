@@ -11,7 +11,7 @@ namespace M2MTech\FlysystemStreamWrapper\Tests\FileCommand;
 
 use M2MTech\FlysystemStreamWrapper\Tests\Assert;
 
-class MkdirTest extends AbstractFileCommandTest
+class MkdirTest extends AbstractFileCommandTestCase
 {
     use Assert;
 

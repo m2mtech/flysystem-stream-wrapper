@@ -9,9 +9,9 @@
 
 namespace M2MTech\FlysystemStreamWrapper\Tests;
 
-use M2MTech\FlysystemStreamWrapper\Tests\FileCommand\AbstractFileCommandTest;
+use M2MTech\FlysystemStreamWrapper\Tests\FileCommand\AbstractFileCommandTestCase;
 
-class AppendTest extends AbstractFileCommandTest
+class AppendTest extends AbstractFileCommandTestCase
 {
     public function test(): void
     {

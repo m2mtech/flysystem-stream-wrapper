@@ -14,7 +14,7 @@ use M2MTech\FlysystemStreamWrapper\Flysystem\StreamCommand\UrlStatCommand;
 use M2MTech\FlysystemStreamWrapper\Tests\Assert;
 use PHPUnit\Framework\MockObject\MockObject;
 
-class UrlStatTest extends AbstractStreamCommandTest
+class UrlStatTest extends AbstractStreamCommandTestCase
 {
     use Assert;
 

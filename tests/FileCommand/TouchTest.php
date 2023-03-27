@@ -14,7 +14,7 @@ use League\Flysystem\UnableToWriteFile;
 use M2MTech\FlysystemStreamWrapper\FlysystemStreamWrapper;
 use M2MTech\FlysystemStreamWrapper\Tests\Assert;
 
-class TouchTest extends AbstractFileCommandTest
+class TouchTest extends AbstractFileCommandTestCase
 {
     use Assert;
 

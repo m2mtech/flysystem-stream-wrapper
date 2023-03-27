@@ -16,7 +16,7 @@ use M2MTech\FlysystemStreamWrapper\Flysystem\StreamCommand\RmdirCommand;
 use M2MTech\FlysystemStreamWrapper\Tests\Assert;
 use PHPUnit\Framework\MockObject\MockObject;
 
-class RmdirTest extends AbstractStreamCommandTest
+class RmdirTest extends AbstractStreamCommandTestCase
 {
     use Assert;
 
@@ -33,7 +33,7 @@ class RmdirTest extends AbstractStreamCommandTest
     }
 
     /** @return array<array<string>> */
-    public function rootDirectoryProvider(): array
+    public static function rootDirectoryProvider(): array
     {
         return [
             [''],

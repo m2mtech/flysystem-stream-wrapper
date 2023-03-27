@@ -11,9 +11,9 @@ namespace M2MTech\FlysystemStreamWrapper\Tests\StreamCommand;
 
 use M2MTech\FlysystemStreamWrapper\Flysystem\FileData;
 use M2MTech\FlysystemStreamWrapper\Flysystem\StreamCommand\StreamSetOptionCommand;
-use M2MTech\FlysystemStreamWrapper\Tests\FileCommand\AbstractFileCommandTest;
+use M2MTech\FlysystemStreamWrapper\Tests\FileCommand\AbstractFileCommandTestCase;
 
-class StreamSetOptionTest extends AbstractFileCommandTest
+class StreamSetOptionTest extends AbstractFileCommandTestCase
 {
     public function test(): void
     {

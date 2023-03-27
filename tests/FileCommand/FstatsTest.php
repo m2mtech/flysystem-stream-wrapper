@@ -9,7 +9,7 @@
 
 namespace M2MTech\FlysystemStreamWrapper\Tests\FileCommand;
 
-class FstatsTest extends AbstractStatTest
+class FstatsTest extends AbstractStatTestCaseCase
 {
     use DataProvider;
 

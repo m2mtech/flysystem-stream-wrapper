@@ -9,7 +9,7 @@
 
 namespace M2MTech\FlysystemStreamWrapper\Tests\FileCommand;
 
-class StreamSetTimeoutTest extends AbstractFileCommandTest
+class StreamSetTimeoutTest extends AbstractFileCommandTestCase
 {
     use DataProvider;
 

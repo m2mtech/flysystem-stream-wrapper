@@ -17,35 +17,39 @@ use M2MTech\FlysystemStreamWrapper\Flysystem\StreamCommand\StreamMetadataCommand
 use M2MTech\FlysystemStreamWrapper\Flysystem\StreamCommand\StreamStatCommand;
 use M2MTech\FlysystemStreamWrapper\FlysystemStreamWrapper;
 use M2MTech\FlysystemStreamWrapper\Tests\Assert;
-use M2MTech\FlysystemStreamWrapper\Tests\StreamCommand\AbstractStreamCommandTest;
+use M2MTech\FlysystemStreamWrapper\Tests\StreamCommand\AbstractStreamCommandTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use TypeError;
 
-class AdapterWithoutVisibilitySupportTest extends AbstractStreamCommandTest
+class AdapterWithoutVisibilitySupportTest extends AbstractStreamCommandTestCase
 {
     use Assert;
 
-    public function testMetaAccess(): void
+    /** @return array<array<int|string>> */
+    public static function metaAccessProvider(): array
+    {
+        return [
+            [Visibility::PRIVATE, 0600],
+            [Visibility::PUBLIC, 0644],
+        ];
+    }
+
+    /** @dataProvider metaAccessProvider */
+    public function testMetaAccess(string $visibility, int $permission): void
     {
         $current = $this->getCurrent();
         $this->ignoreVisibilityErrors($current);
 
         /** @var MockObject $filesystem */
         $filesystem = $current->filesystem;
-        $filesystem->expects($this->exactly(2))
+        $filesystem->expects($this->once())
             ->method('setVisibility')
-            ->withConsecutive(
-                ['test', Visibility::PRIVATE],
-                ['test', Visibility::PUBLIC]
-            )
+            ->with('test', $visibility)
             ->willThrowException(UnableToSetVisibility::atLocation($current->path))
         ;
 
         $this->assertTrue(
-            StreamMetadataCommand::run($current, self::TEST_PATH, STREAM_META_ACCESS, 0600)
-        );
-        $this->assertTrue(
-            StreamMetadataCommand::run($current, self::TEST_PATH, STREAM_META_ACCESS, 0644)
+            StreamMetadataCommand::run($current, self::TEST_PATH, STREAM_META_ACCESS, $permission)
         );
     }
 
@@ -124,7 +128,7 @@ class AdapterWithoutVisibilitySupportTest extends AbstractStreamCommandTest
 
     private function ignoreVisibilityErrors(FileData $current): void
     {
-        FlysystemStreamWrapper::$config[AbstractStreamCommandTest::TEST_PROTOCOL][FlysystemStreamWrapper::IGNORE_VISIBILITY_ERRORS] = true;
+        FlysystemStreamWrapper::$config[AbstractStreamCommandTestCase::TEST_PROTOCOL][FlysystemStreamWrapper::IGNORE_VISIBILITY_ERRORS] = true;
         $current->config[FlysystemStreamWrapper::IGNORE_VISIBILITY_ERRORS] = true;
     }
 }

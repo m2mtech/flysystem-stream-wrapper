@@ -9,7 +9,7 @@
 
 namespace M2MTech\FlysystemStreamWrapper\Tests\FileCommand;
 
-class IsReadableTest extends AbstractFileCommandTest
+class IsReadableTest extends AbstractFileCommandTestCase
 {
     public function test(): void
     {

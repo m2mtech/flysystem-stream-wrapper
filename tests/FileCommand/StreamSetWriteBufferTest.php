@@ -9,7 +9,7 @@
 
 namespace M2MTech\FlysystemStreamWrapper\Tests\FileCommand;
 
-class StreamSetWriteBufferTest extends AbstractFileCommandTest
+class StreamSetWriteBufferTest extends AbstractFileCommandTestCase
 {
     use DataProvider;
 

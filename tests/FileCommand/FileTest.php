@@ -9,7 +9,7 @@
 
 namespace M2MTech\FlysystemStreamWrapper\Tests\FileCommand;
 
-class FileTest extends AbstractFileCommandTest
+class FileTest extends AbstractFileCommandTestCase
 {
     public function test(): void
     {

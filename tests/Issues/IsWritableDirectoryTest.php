@@ -10,9 +10,9 @@
 namespace M2MTech\FlysystemStreamWrapper\Tests\Issues;
 
 use M2MTech\FlysystemStreamWrapper\Tests\Assert;
-use M2MTech\FlysystemStreamWrapper\Tests\FileCommand\AbstractFileCommandTest;
+use M2MTech\FlysystemStreamWrapper\Tests\FileCommand\AbstractFileCommandTestCase;
 
-class IsWritableDirectoryTest extends AbstractFileCommandTest
+class IsWritableDirectoryTest extends AbstractFileCommandTestCase
 {
     use Assert;
 

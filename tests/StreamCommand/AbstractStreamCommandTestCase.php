@@ -14,7 +14,7 @@ use M2MTech\FlysystemStreamWrapper\Flysystem\FileData;
 use M2MTech\FlysystemStreamWrapper\FlysystemStreamWrapper;
 use PHPUnit\Framework\TestCase;
 
-abstract class AbstractStreamCommandTest extends TestCase
+abstract class AbstractStreamCommandTestCase extends TestCase
 {
     public const TEST_PROTOCOL = 'test';
     public const TEST_PATH = 'test://test';

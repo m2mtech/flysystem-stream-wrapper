@@ -9,7 +9,7 @@
 
 namespace M2MTech\FlysystemStreamWrapper\Tests\FileCommand;
 
-class FreadTest extends AbstractFileCommandTest
+class FreadTest extends AbstractFileCommandTestCase
 {
     use DataProvider;
 

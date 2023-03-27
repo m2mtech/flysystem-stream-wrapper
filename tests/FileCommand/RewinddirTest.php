@@ -9,7 +9,7 @@
 
 namespace M2MTech\FlysystemStreamWrapper\Tests\FileCommand;
 
-class RewinddirTest extends AbstractFileCommandTest
+class RewinddirTest extends AbstractFileCommandTestCase
 {
     public function test(): void
     {

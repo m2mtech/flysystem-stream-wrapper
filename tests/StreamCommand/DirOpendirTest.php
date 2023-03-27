@@ -17,7 +17,7 @@ use M2MTech\FlysystemStreamWrapper\Flysystem\StreamCommand\DirOpendirCommand;
 use M2MTech\FlysystemStreamWrapper\Tests\Assert;
 use PHPUnit\Framework\MockObject\MockObject;
 
-class DirOpendirTest extends AbstractStreamCommandTest
+class DirOpendirTest extends AbstractStreamCommandTestCase
 {
     use Assert;
 

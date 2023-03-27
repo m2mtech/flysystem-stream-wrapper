@@ -11,7 +11,7 @@ namespace M2MTech\FlysystemStreamWrapper\Tests\FileCommand;
 
 use M2MTech\FlysystemStreamWrapper\Tests\Assert;
 
-class RenameTest extends AbstractFileCommandTest
+class RenameTest extends AbstractFileCommandTestCase
 {
     use Assert;
 

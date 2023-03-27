@@ -12,7 +12,7 @@ namespace M2MTech\FlysystemStreamWrapper\Tests\FileCommand;
 use Faker\Factory as Faker;
 use M2MTech\FlysystemStreamWrapper\Tests\Assert;
 
-class FflushTest extends AbstractFileCommandTest
+class FflushTest extends AbstractFileCommandTestCase
 {
     use Assert;
     use DataProvider;

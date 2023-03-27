@@ -9,7 +9,7 @@
 
 namespace M2MTech\FlysystemStreamWrapper\Tests\FileCommand;
 
-class StreamSetBlockingTest extends AbstractFileCommandTest
+class StreamSetBlockingTest extends AbstractFileCommandTestCase
 {
     use DataProvider;
 

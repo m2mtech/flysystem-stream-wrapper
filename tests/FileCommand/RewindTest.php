@@ -9,7 +9,7 @@
 
 namespace M2MTech\FlysystemStreamWrapper\Tests\FileCommand;
 
-class RewindTest extends AbstractFileCommandTest
+class RewindTest extends AbstractFileCommandTestCase
 {
     use DataProvider;
 

@@ -11,7 +11,7 @@ namespace M2MTech\FlysystemStreamWrapper\Tests\FileCommand;
 
 use M2MTech\FlysystemStreamWrapper\Tests\Assert;
 
-class FilectimeTest extends AbstractFileCommandTest
+class FilectimeTest extends AbstractFileCommandTestCase
 {
     use Assert;
 
