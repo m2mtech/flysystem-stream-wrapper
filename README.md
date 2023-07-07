@@ -52,6 +52,18 @@ FlysystemStreamWrapper::register('fly', $filesystem, [
 ]);
 ```
 
+### Problems with Directories (`file_exists` / `is_dir`)
+
+To provide fully transparent behaviour for directories enable the emulation of
+last modified timestamp, and ignore visibility errors, e.g.:
+
+```php
+FlysystemStreamWrapper::register('fly', $filesystem, [
+    FlysystemStreamWrapper::IGNORE_VISIBILITY_ERRORS => true,
+    FlysystemStreamWrapper::EMULATE_DIRECTORY_LAST_MODIFIED => true,
+]);
+```
+
 ### Problems with `is_readable` / `is_writable`
 
 A couple of filesystem functions use `uid` and `gid` of the user running php. Unfortunately there is no straight forward cross-plattform usable method available to derive those values. The wrapper tries to *guess* them. But depending on your system settings it might fail.

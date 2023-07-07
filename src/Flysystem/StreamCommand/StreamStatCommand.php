@@ -125,28 +125,49 @@ final class StreamStatCommand
 
         $mode = 0;
         $size = 0;
+        $lastModified = false;
 
         try {
             if ('directory' === $current->filesystem->mimeType($current->file)) {
                 [$mode, $size] = self::getRemoteDirectoryStats($converter, $visibility);
+                $lastModified = self::getRemoteDirectoryLastModified($current);
             } else {
                 [$mode, $size] = self::getRemoteFileStats($current, $converter, $visibility);
+                $lastModified = $current->filesystem->lastModified($current->file);
             }
         } catch (UnableToRetrieveMetadata $e) {
             if (method_exists($current->filesystem, 'directoryExists')) {
                 if ($current->filesystem->directoryExists($current->file)) {
                     [$mode, $size] = self::getRemoteDirectoryStats($converter, $visibility);
+                    $lastModified = self::getRemoteDirectoryLastModified($current);
                 } elseif ($current->filesystem->fileExists($current->file)) {
                     [$mode, $size] = self::getRemoteFileStats($current, $converter, $visibility);
+                    $lastModified = $current->filesystem->lastModified($current->file);
                 }
             } else {
                 throw $e;
             }
         }
 
-        $lastModified = $current->filesystem->lastModified($current->file);
-
         return [$mode, $size, $lastModified];
+    }
+
+    /**
+     * @return int|false
+     */
+    private static function getRemoteDirectoryLastModified(FileData $current)
+    {
+        $lastModified = false;
+        if ($current->emulateDirectoryLastModified()) {
+            $lastModified = 0;
+            $listing = $current->filesystem->listContents($current->file)->getIterator();
+            $dirListing = $listing instanceof Iterator ? $listing : new \IteratorIterator($listing);
+            /** @var \League\Flysystem\FileAttributes $item */
+            foreach ($dirListing as $item) {
+                $lastModified = max($lastModified, $item->lastModified());
+            }
+        }
+        return $lastModified;
     }
 
     /**

@@ -74,4 +74,9 @@ final class FileData
     {
         return (bool) $this->config[FlysystemStreamWrapper::IGNORE_VISIBILITY_ERRORS];
     }
+
+    public function emulateDirectoryLastModified(): bool
+    {
+        return (bool) $this->config[FlysystemStreamWrapper::EMULATE_DIRECTORY_LAST_MODIFIED];
+    }
 }
