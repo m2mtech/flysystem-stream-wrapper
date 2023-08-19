@@ -19,7 +19,9 @@ return static function (ECSConfig $ecsConfig): void {
     ]);
 
     // https://github.com/symplify/easy-coding-standard/blob/10.3.3/config/set/symfony.php
-    $ecsConfig->rule(ConcatSpaceFixer::class);
+    $ecsConfig->ruleWithConfiguration(ConcatSpaceFixer::class, [
+        'spacing' => 'none',
+    ]);
 
     $ecsConfig->paths([
         __DIR__.'/src',
@@ -27,7 +29,4 @@ return static function (ECSConfig $ecsConfig): void {
     ]);
 
     $ecsConfig->cacheDirectory(__DIR__.'/.ecs_cache');
-
-    $parameters = $ecsConfig->parameters();
-    $parameters->set(Option::PARALLEL, true);
 };

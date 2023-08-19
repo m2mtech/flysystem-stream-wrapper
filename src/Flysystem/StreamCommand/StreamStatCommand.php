@@ -9,6 +9,9 @@
 
 namespace M2MTech\FlysystemStreamWrapper\Flysystem\StreamCommand;
 
+use Iterator;
+use IteratorIterator;
+use League\Flysystem\FileAttributes;
 use League\Flysystem\FilesystemException;
 use League\Flysystem\UnableToRetrieveMetadata;
 use League\Flysystem\UnixVisibility\PortableVisibilityConverter;
@@ -125,39 +128,45 @@ final class StreamStatCommand
 
         $mode = 0;
         $size = 0;
+        $lastModified = 0;
 
         try {
             if ('directory' === $current->filesystem->mimeType($current->file)) {
-                [$mode, $size] = self::getRemoteDirectoryStats($converter, $visibility);
+                [$mode, $size, $lastModified] = self::getRemoteDirectoryStats($current, $converter, $visibility);
             } else {
-                [$mode, $size] = self::getRemoteFileStats($current, $converter, $visibility);
+                [$mode, $size, $lastModified] = self::getRemoteFileStats($current, $converter, $visibility);
             }
         } catch (UnableToRetrieveMetadata $e) {
             if (method_exists($current->filesystem, 'directoryExists')) {
                 if ($current->filesystem->directoryExists($current->file)) {
-                    [$mode, $size] = self::getRemoteDirectoryStats($converter, $visibility);
+                    [$mode, $size, $lastModified] = self::getRemoteDirectoryStats($current, $converter, $visibility);
                 } elseif ($current->filesystem->fileExists($current->file)) {
-                    [$mode, $size] = self::getRemoteFileStats($current, $converter, $visibility);
+                    [$mode, $size, $lastModified] = self::getRemoteFileStats($current, $converter, $visibility);
                 }
             } else {
                 throw $e;
             }
         }
 
-        $lastModified = $current->filesystem->lastModified($current->file);
-
         return [$mode, $size, $lastModified];
     }
 
     /**
      * @return array<int, int>
+     *
+     * @throws FilesystemException
      */
-    private static function getRemoteDirectoryStats(PortableVisibilityConverter $converter, string $visibility): array
-    {
+    private static function getRemoteDirectoryStats(
+        FileData $current,
+        PortableVisibilityConverter $converter,
+        string $visibility
+    ): array {
         $mode = 040000 + $converter->forDirectory($visibility);
         $size = 0;
 
-        return [$mode, $size];
+        $lastModified = self::getRemoteDirectoryLastModified($current);
+
+        return [$mode, $size, $lastModified];
     }
 
     /**
@@ -172,7 +181,29 @@ final class StreamStatCommand
     ): array {
         $mode = 0100000 + $converter->forFile($visibility);
         $size = $current->filesystem->fileSize($current->file);
+        $lastModified = $current->filesystem->lastModified($current->file);
 
-        return [$mode, $size];
+        return [$mode, $size, $lastModified];
+    }
+
+    /**
+     * @throws FilesystemException
+     */
+    private static function getRemoteDirectoryLastModified(FileData $current): int
+    {
+        if (!$current->emulateDirectoryLastModified()) {
+            return $current->filesystem->lastModified($current->file);
+        }
+
+        $lastModified = 0;
+        $listing = $current->filesystem->listContents($current->file)->getIterator();
+        $dirListing = $listing instanceof Iterator ? $listing : new IteratorIterator($listing);
+
+        /** @var FileAttributes $item */
+        foreach ($dirListing as $item) {
+            $lastModified = max($lastModified, $item->lastModified());
+        }
+
+        return $lastModified;
     }
 }

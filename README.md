@@ -33,7 +33,7 @@ mkdir('fly://happy_thoughts');
 FlysystemStreamWrapper::unregister('fly');
 ```
 
-Because locking is not supported by Flysystem V2, the stream wrapper implements [`symfony/lock`](https://symfony.com/doc/current/components/lock.html). As default, it uses file locking using `/tmp`, which you can adjust via the configuration:
+The stream wrapper implements [`symfony/lock`](https://symfony.com/doc/current/components/lock.html) due to Flysystem V2 not supporting locking. By default, file locking using `/tmp` is used, but you can adjust this through configuration:
 
 ```php
 FlysystemStreamWrapper::register('fly', $filesystem, [
@@ -42,9 +42,9 @@ FlysystemStreamWrapper::register('fly', $filesystem, [
 ]);
 ```
 
-### Problems with Visibility
+### Handling Visibility Issues
 
-Some adaptors seem to throw an exception when visibility is used. To be able to use such adaptors, tell the stream wrapper to ignore them, e.g.:
+Some adaptors might throw exceptions when dealing with visibility. If you encounter such issues, configure the stream wrapper to bypass them:
 
 ```php
 FlysystemStreamWrapper::register('fly', $filesystem, [
@@ -52,10 +52,19 @@ FlysystemStreamWrapper::register('fly', $filesystem, [
 ]);
 ```
 
-### Problems with `is_readable` / `is_writable`
+### Addressing Directory Issues (`file_exists` / `is_dir`)
 
-A couple of filesystem functions use `uid` and `gid` of the user running php. Unfortunately there is no straight forward cross-plattform usable method available to derive those values. The wrapper tries to *guess* them. But depending on your system settings it might fail.
-In such cases you can set them manually, e.g.:
+Some adaptors might not return dates for the last modified attribute for directories. In such cases, you can enable emulation to achieve the desired behavior:
+
+```php
+FlysystemStreamWrapper::register('fly', $filesystem, [
+    FlysystemStreamWrapper::EMULATE_DIRECTORY_LAST_MODIFIED => true,
+]);
+```
+
+### Dealing with `is_readable` / `is_writable`
+
+Some filesystem functions depend on the `uid` and `gid` of the user executing PHP. Since a reliable cross-platform method to derive these values isn't available, the wrapper attempts to estimate them. If this fails, set them manually:
 
 ```php
 FlysystemStreamWrapper::register('fly', $filesystem, [
@@ -64,7 +73,7 @@ FlysystemStreamWrapper::register('fly', $filesystem, [
 ]);
 ```
 
-or go haywire accessing the parameters for [`PortableVisibilityConverter`](https://flysystem.thephpleague.com/docs/usage/unix-visibility/) directly via:
+Alternatively, access the parameters for [`PortableVisibilityConverter`](https://flysystem.thephpleague.com/docs/usage/unix-visibility/) directly:
 
 ```php
 FlysystemStreamWrapper::register('fly', $filesystem, [
@@ -78,36 +87,42 @@ FlysystemStreamWrapper::register('fly', $filesystem, [
 
 ## Testing
 
-This package has been developed for php 7.4 with compatibility tested for php 7.2 to 8.2.
+This package was developed using PHP 7.4 and has been tested for compatibility with PHP versions 7.2 through 8.2.
 
+To test:
+
+- With PHP installed:
 ```bash
-# with php installed
 composer test
+```
 
-# or inside docker e.g. for php 7.4
-docker-compose run php74 composer test
+- Inside a Docker environment for PHP 7.4:
+```bash
+docker compose run php74 composer test
+```
 
-# note that phpunit v10 used stating php 8.1 will require to use a different config file:
-docker-compose run php81 vendor/bin/phpunit -c phpunit.10.xml
+**Note**: PHPUnit v10, used from PHP 8.1 onwards, requires a different config file:
+```bash
+docker compose run php81 composer test10
 ```
 
 ## Changelog
 
-Please see [CHANGELOG](CHANGELOG.md) for more information about recent changes.
+For information on recent changes, refer to the [CHANGELOG](CHANGELOG.md).
 
 ## Contributing
 
-Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
+For contribution guidelines, see [CONTRIBUTING](.github/CONTRIBUTING.md).
 
 ## Security Vulnerabilities
 
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
+If you discover any security vulnerabilities, please follow [our security policy](../../security/policy) for reporting.
 
 ## Credits
 
-- This package is based on [twistor/flysystem-stream-wrapper]. Kudos and thanks to [Chris Leppanen](https://github.com/twistor).
+- This package was inspired by [twistor/flysystem-stream-wrapper](https://github.com/twistor/flysystem-stream-wrapper). Many thanks to [Chris Leppanen](https://github.com/twistor).
 - [All Contributors](../../contributors)
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+Licensed under the MIT License. See the [License File](LICENSE.md) for more details.

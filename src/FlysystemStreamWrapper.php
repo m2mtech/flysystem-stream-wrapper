@@ -24,6 +24,8 @@ final class FlysystemStreamWrapper
 
     public const IGNORE_VISIBILITY_ERRORS = 'ignore_visibility_errors';
 
+    public const EMULATE_DIRECTORY_LAST_MODIFIED = 'emulate_directory_last_modified';
+
     public const UID = 'uid';
     public const GID = 'gid';
 
@@ -38,6 +40,7 @@ final class FlysystemStreamWrapper
         self::LOCK_TTL => 300,
 
         self::IGNORE_VISIBILITY_ERRORS => false,
+        self::EMULATE_DIRECTORY_LAST_MODIFIED => false,
 
         self::UID => null,
         self::GID => null,

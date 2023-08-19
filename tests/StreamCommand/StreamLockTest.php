@@ -13,14 +13,14 @@ use Amp\Parallel\Sync\SerializationException;
 use Amp\Parallel\Sync\SharedMemoryException;
 use Amp\Parallel\Sync\SharedMemoryParcel;
 use Amp\Parallel\Worker\TaskFailureException;
-use function Amp\ParallelFunctions\parallel;
 use Amp\Promise;
-use function Amp\Promise\all;
-use function Amp\Promise\wait;
 use Amp\Sync\SyncException;
 use M2MTech\FlysystemStreamWrapper\Flysystem\StreamCommand\StreamLockCommand;
 use M2MTech\FlysystemStreamWrapper\Tests\Assert;
 use Throwable;
+use function Amp\ParallelFunctions\parallel;
+use function Amp\Promise\all;
+use function Amp\Promise\wait;
 
 class StreamLockTest extends AbstractStreamCommandTestCase
 {
