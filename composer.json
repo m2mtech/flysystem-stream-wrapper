@@ -20,7 +20,7 @@
     "require": {
         "php": "^7.2 || ^8.0",
         "league/flysystem": "^2.3|^3.0",
-        "symfony/lock": "^5.3|^6.0"
+        "symfony/lock": "^5.3|^6.0|^7.0"
     },
     "replace": {
         "twistor/flysystem-stream-wrapper": "v1.0.9"

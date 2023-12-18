@@ -34,6 +34,7 @@ class RewinddirTest extends AbstractFileCommandTestCase
         $this->assertCount(4, $dirContent);
 
         rewinddir();
+        // @phpstan-ignore-next-line
         while (false !== ($entry = readdir($handle))) {
             $dirContent[] = $entry;
         }

@@ -27,7 +27,19 @@ class FtellTest extends AbstractFileCommandTestCase
         }
 
         fseek($handle, 42);
-        if (in_array($mode, ['w', 'w+', 'a'])) {
+        if ('w' === $mode[0]) {
+            if (version_compare(PHP_VERSION, '8.3.0') >= 0) {
+                $this->assertSame(42, ftell($handle));
+
+                fwrite($handle, 'test');
+                $this->assertSame(46, ftell($handle));
+            } else {
+                $this->assertSame(0, ftell($handle));
+
+                fwrite($handle, 'test');
+                $this->assertSame(4, ftell($handle));
+            }
+        } elseif ('a' === $mode) {
             $this->assertSame(0, ftell($handle));
 
             fwrite($handle, 'test');

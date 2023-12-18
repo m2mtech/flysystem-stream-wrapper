@@ -87,7 +87,7 @@ FlysystemStreamWrapper::register('fly', $filesystem, [
 
 ## Testing
 
-This package was developed using PHP 7.4 and has been tested for compatibility with PHP versions 7.2 through 8.2.
+This package was developed using PHP 7.4 and has been tested for compatibility with PHP versions 7.2 through 8.3.
 
 To test:
 

@@ -1,6 +1,7 @@
 # Changelog
 
-## [Unreleased]
+## [1.3.4] - 2023-12-18
+- compatibility with symfony 7.x & php 8.3
 - allow ecs 12.x
 - added `EMULATE_DIRECTORY_LAST_MODIFIED`, thanks to @das-peter
 
@@ -53,6 +54,7 @@
 --->
 
 [Unreleased]: https://github.com/m2mtech/flysystem-stream-wrapper/compare/v1.3.3...HEAD
+[1.3.4]: https://github.com/m2mtech/flysystem-stream-wrapper/compare/v1.3.3...v1.3.4
 [1.3.3]: https://github.com/m2mtech/flysystem-stream-wrapper/compare/v1.3.2...v1.3.3
 [1.3.2]: https://github.com/m2mtech/flysystem-stream-wrapper/compare/v1.3.1...v1.3.2
 [1.3.1]: https://github.com/m2mtech/flysystem-stream-wrapper/compare/v1.3.0...v1.3.1

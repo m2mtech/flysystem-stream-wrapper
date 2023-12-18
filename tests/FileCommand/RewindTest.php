@@ -33,7 +33,13 @@ class RewindTest extends AbstractFileCommandTestCase
         }
 
         fseek($handle, 42);
-        if ('w' === $mode[0] || 'a' === $mode) {
+        if ('w' === $mode[0]) {
+            if (version_compare(PHP_VERSION, '8.3.0') >= 0) {
+                $this->assertSame(42, ftell($handle));
+            } else {
+                $this->assertSame(0, ftell($handle));
+            }
+        } elseif ('a' === $mode) {
             $this->assertSame(0, ftell($handle));
         } else {
             $this->assertSame(42, ftell($handle));

@@ -42,9 +42,15 @@ class FseekTest extends AbstractFileCommandTestCase
             $expected = (string) substr($content, -23);
             $this->assertSame($expected, $string);
         } else {
-            $this->assertSame(-1, fseek($handle, 42));
-            $this->assertSame(-1, fseek($handle, 42, SEEK_CUR));
-            $this->assertSame(-1, fseek($handle, -42, SEEK_END));
+            if (version_compare(PHP_VERSION, '8.3.0') >= 0) {
+                $this->assertSame(0, fseek($handle, 42));
+                $this->assertSame(0, fseek($handle, 42, SEEK_CUR));
+                $this->assertSame(-1, fseek($handle, -42, SEEK_END));
+            } else {
+                $this->assertSame(-1, fseek($handle, 42));
+                $this->assertSame(-1, fseek($handle, 42, SEEK_CUR));
+                $this->assertSame(-1, fseek($handle, -42, SEEK_END));
+            }
         }
 
         fclose($handle);
