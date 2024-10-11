@@ -10,6 +10,7 @@
 namespace M2MTech\FlysystemStreamWrapper\Flysystem;
 
 use League\Flysystem\FilesystemException;
+use M2MTech\FlysystemStreamWrapper\Flysystem\StreamCommand\ExceptionHandler;
 use M2MTech\FlysystemStreamWrapper\Flysystem\StreamCommand\StreamWriteCommand;
 
 /**
@@ -17,6 +18,8 @@ use M2MTech\FlysystemStreamWrapper\Flysystem\StreamCommand\StreamWriteCommand;
  */
 final class StreamWrapper
 {
+    use ExceptionHandler;
+
     /** @var FileData */
     private $current;
 
@@ -64,7 +67,7 @@ final class StreamWrapper
                 $this->current->filesystem->writeStream($this->current->file, $this->current->handle);
             } catch (FilesystemException $e) {
                 trigger_error(
-                    'stream_close('.$this->current->path.') Unable to sync file : '.$e->getMessage(),
+                    'stream_close('.$this->current->path.') Unable to sync file : '.self::collectErrorMessage($e),
                     E_USER_WARNING
                 );
             }
@@ -95,7 +98,7 @@ final class StreamWrapper
                 $this->current->filesystem->writeStream($this->current->file, $this->current->handle);
             } catch (FilesystemException $e) {
                 trigger_error(
-                    'stream_flush('.$this->current->path.') Unable to sync file : '.$e->getMessage(),
+                    'stream_flush('.$this->current->path.') Unable to sync file : '.self::collectErrorMessage($e),
                     E_USER_WARNING
                 );
                 $success = false;
