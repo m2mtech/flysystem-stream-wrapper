@@ -37,7 +37,7 @@
         "fakerphp/faker": "^1.19",
         "opis/closure": "^3.6",
         "phpstan/phpstan": "^1.10",
-        "phpunit/php-invoker": "^2.0|^3.1|^4.0",
+        "phpunit/php-invoker": "^2.0|^3.1|^4.0|^5.0",
         "phpunit/phpunit": "^8.5|^9.6|^10.0",
         "symplify/easy-coding-standard": "^12.0"
     },
