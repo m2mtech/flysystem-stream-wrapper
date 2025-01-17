@@ -23,7 +23,7 @@ final class StreamWrapper
     /** @var FileData */
     private $current;
 
-    public function __construct(FileData $current = null)
+    public function __construct(?FileData $current = null)
     {
         $this->current = $current ?? new FileData();
     }
