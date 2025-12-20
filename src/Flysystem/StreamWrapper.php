@@ -71,6 +71,10 @@ final class StreamWrapper
                     E_USER_WARNING
                 );
             }
+
+            if (!is_resource($this->current->handle)) {
+                return;
+            }
         }
 
         fclose($this->current->handle);
