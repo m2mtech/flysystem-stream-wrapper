@@ -142,6 +142,8 @@ final class StreamStatCommand
                     [$mode, $size, $lastModified] = self::getRemoteDirectoryStats($current, $converter, $visibility);
                 } elseif ($current->filesystem->fileExists($current->file)) {
                     [$mode, $size, $lastModified] = self::getRemoteFileStats($current, $converter, $visibility);
+                } else {
+                    throw $e;
                 }
             } else {
                 throw $e;
