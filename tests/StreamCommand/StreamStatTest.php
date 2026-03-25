@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the flysystem-stream-wrapper package.
  *
@@ -153,6 +154,25 @@ class StreamStatTest extends AbstractStreamCommandTestCase
         } catch (FilesystemException $e) {
             $this->fail();
         }
+    }
+
+    public function testLastModifiedException(): void
+    {
+        $current = $this->getCurrent();
+
+        /** @var MockObject $filesystem */
+        $filesystem = $current->filesystem;
+        $filesystem->method('visibility')
+            ->with('test')
+            ->willReturn(Visibility::PUBLIC);
+        $filesystem->method('lastModified')
+            ->with('test')
+            ->willThrowException(UnableToRetrieveMetadata::lastModified(self::TEST_PATH));
+
+        $this->assertFalse(@StreamStatCommand::run($current));
+
+        $this->expectErrorWithMessage('Stat failed');
+        StreamStatCommand::run($current);
     }
 
     public function testRemoteException(): void
